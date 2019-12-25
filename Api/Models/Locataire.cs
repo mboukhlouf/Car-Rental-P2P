@@ -7,6 +7,6 @@ namespace Api.Models
 {
     public class Locataire : Client
     {
-        private ICollection<Annonce> Annonces { get; set; }
+        public ICollection<Annonce> Annonces { get; set; }
     }
 }
