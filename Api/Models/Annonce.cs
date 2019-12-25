@@ -14,6 +14,7 @@ namespace Api.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
+
         [DataType(DataType.ImageUrl)]
         public Uri ImageUri { get; set; }
 
@@ -30,6 +31,7 @@ namespace Api.Models
         public String NombrePortes { get; set; }
 
         public Locataire Locataire { get; set; }
+
         public ICollection<Reservation> Reservations { get; set; }
     }
 }
