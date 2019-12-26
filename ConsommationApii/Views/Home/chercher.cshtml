@@ -1,17 +1,16 @@
 ﻿@model IEnumerable<Api.Models.Annonce>
 @{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "chercher";
 }
-    <head>
-        <style type="text/css">
-            .content
-            {
-                width:800px;
-                margin-left:100px;
-                margin-right:100px;
-            }
-           
-            </style>
+<h1>chercher+@ViewBag.nom</h1>
+<head>
+    <style type="text/css">
+        .content {
+            width: 800px;
+            margin-left: 100px;
+            margin-right: 100px;
+        }
+    </style>
 </head>
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -29,8 +28,8 @@
     </section>
 
     <!-- Main content -->
-    <section class="content" >
-     
+    <section class="content">
+
 
         <!-- Default box -->
         @foreach (var item in Model)
@@ -44,3 +43,5 @@
     </section>
     <!-- /.content -->
 </div>
+
+

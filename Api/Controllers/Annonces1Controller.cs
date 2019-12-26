@@ -26,9 +26,9 @@ namespace Api.Controllers
         {
             return await _context.Annonce.ToListAsync();
         }
-
+        /*
         // GET: api/Annonces1/5
-        [HttpGet("{id}")]
+           [HttpGet("{id}")]
         public async Task<ActionResult<Annonce>> GetAnnonce(int id)
         {
             var annonce = await _context.Annonce.FindAsync(id);
@@ -40,7 +40,19 @@ namespace Api.Controllers
 
             return annonce;
         }
+        */
+        [HttpGet("{marque}")]
+        public async Task<ActionResult<IEnumerable<Annonce>>> GetAnnonce(string marque)
+        {
+            var annonce = await _context.Annonce.Where(x => x.Marque.Equals(marque)).ToListAsync();
+                
+            if (annonce == null)
+            {
+                return NotFound();
+            }
 
+            return annonce;
+        }
         // PUT: api/Annonces1/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.

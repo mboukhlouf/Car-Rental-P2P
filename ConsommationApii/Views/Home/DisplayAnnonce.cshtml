@@ -1,11 +1,77 @@
 ﻿@model Api.Models.Annonce
-<div class="col-sm-4 col-lg-4 col-md-4">
-    <div class="thumbnail">
 
-        <h1>@Model.Modele</h1>
-        <div class="caption">
-            <h3 class="pull-right">@Model.Marque</h3>
-            <p>@Model.Kilométrage</p>
-        </div>
-    </div>
-</div>
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>View</title>
+    <style type="text/css">
+ 
+
+        .verticalHorizontal {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+  
+        .container {
+            overflow: hidden;
+            position: relative;
+            margin: auto;
+            width: var(--width);
+            height: var(--height);
+            background-color: var(--lightgray2);
+        }
+        .card_bottom
+        {
+            font-style:oblique;
+            margin-left:30px;
+            margin-bottom:10px;
+
+        }
+        .main {
+            padding: var(--containerPadding);
+        }
+        .name
+        {
+            margin-left:30px;
+        }
+   
+    
+    </style>
+
+</head>
+<body>
+   
+
+            <div class="card">
+                <div class="card_top">
+                    <strong class="name">@Model.Marque</strong>
+
+                </div>
+                <div class="card_mid">
+                    <img src="http://co0kie.github.io/htmlcss/bmw/img/car1.png" alt="">
+                </div>
+                <div class="card_bottom">
+                    <img src="http://co0kie.github.io/htmlcss/bmw/img/settings.svg" height="25" width="25" alt="">
+                    <small>@Model.Modele</small>
+
+                    <img src="http://co0kie.github.io/htmlcss/bmw/img/flash.svg" height="25" width="25" alt="">
+                    <small>@Model.Annee</small>
+
+                    <img src="http://co0kie.github.io/htmlcss/bmw/img/car.svg" height="25" width="25" alt="">
+                    <small>@Model.Kilométrage</small>
+
+                    <img src="@Url.Content("~/image/porte.jpg")" height="25" width="25" alt="">
+                    <small>@Model.NombrePortes</small>
+
+                </div>
+            </div>
+
+</body>
+</html>

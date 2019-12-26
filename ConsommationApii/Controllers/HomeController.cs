@@ -26,6 +26,10 @@ namespace ConsommationApii.Controllers
         {
             return View();
         }
+        public ActionResult Vue()
+        {
+            return View();
+        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
@@ -36,8 +40,9 @@ namespace ConsommationApii.Controllers
 
         public async Task<ActionResult> Index()
         {
+
             
-                  List < Annonce > EmpInfo = new List<Annonce>();
+            List < Annonce > EmpInfo = new List<Annonce>();
             using (var client = new HttpClient())
             {
 
@@ -107,6 +112,37 @@ namespace ConsommationApii.Controllers
             if (result.IsSuccessStatusCode) { return RedirectToAction("Index"); }
             return View(annonce);
         }
+        [HttpGet]
+        public ActionResult chercher()
+        {
+
+            return View();
+        }
+        [HttpPost]
+        public async Task<ActionResult> chercher(string filtre)
+        {
+            string nom = Request.Form["filtreDrop"];
+            List<Annonce> EmpInfo = new List<Annonce>();
+            using (var client = new HttpClient())
+            {
+
+                client.BaseAddress = new Uri("https://localhost:44325/api/");
+                client.DefaultRequestHeaders.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                HttpResponseMessage Res = await client.GetAsync("Annonces1/" + filtre);
+                if (Res.IsSuccessStatusCode)
+                {
+                    var EmpResponse = Res.Content.ReadAsStringAsync().Result;
+                    EmpInfo = JsonConvert.DeserializeObject<List<Annonce>>(EmpResponse);
+
+                }
+                ViewBag.nom = EmpInfo.Count;
+                return View(EmpInfo);
+            }
+         
+            
+        }
+
 
 
 

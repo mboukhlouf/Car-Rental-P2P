@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Consommation</title>
     <!-- Font Awesome -->
-
     <link href="~/theme/plugins/fontawesome-free/css/all.min.css" rel="stylesheet" />
     <!-- Ionicons -->
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
@@ -30,18 +29,28 @@
                     <a href="#" class="nav-link">Contact</a>
                 </li>
             </ul>
+            @using (Html.BeginForm("chercher", "Home"))
+            {
+        <div class="input-group input-group-sm">
+            <input class="form-control form-control-navbar" name="filtre" type="search" placeholder="Search" aria-label="Search">
+            <div class="input-group-append">
+                <button class="btn btn-navbar" type="submit">
+                    <i class="fas fa-search"></i>
+                </button>
+                @Html.DropDownList("filtreDrop", new List<SelectListItem> { new SelectListItem { Text="km",Value="km"},
+                new SelectListItem { Text="marque",Value="marque"},
+                new SelectListItem { Text="nom de proprietaire",Value="prop"},
+                new SelectListItem { Text="annee",Value="annee"}
+                }, "selecionner")
 
-            <!-- SEARCH FORM -->
-            <form class="form-inline ml-3">
-                <div class="input-group input-group-sm">
-                    <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
-                    <div class="input-group-append">
-                        <button class="btn btn-navbar" type="submit">
-                            <i class="fas fa-search"></i>
-                        </button>
-                    </div>
-                </div>
-            </form>
+
+
+            </div>
+        </div>
+          
+            }
+
+
 
             <!-- Right navbar links -->
             <ul class="navbar-nav ml-auto">
