@@ -1,0 +1,332 @@
+:root{
+    --width: 414px;
+    --height: 825px;
+    --bg: #dde2e7;
+    --containerPadding: 30px;
+    --blue: 28, 105, 212;
+    --lightgray: #f8f9f9;
+    --lightgray2: #f4f4f8;
+    --lightgray3: #f8f8f8;
+    --txtcolo1: #5f6061;
+    --transition: 200ms;
+    --transitionDelay1: 100ms;
+    --transitionDelay2: 300ms;
+    --transitionDelay3: 450ms;
+}
+*{
+    box-sizing: border-box;
+}
+.verticalHorizontal{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+body{
+    background-color: var(--bg);
+    height: 100vh;
+    display: flex;
+    font-family: 'Roboto', sans-serif;
+}
+.container{
+    overflow: hidden;
+    position: relative;
+    margin: auto;
+    width: var(--width);
+    height: var(--height);
+    background-color: var(--lightgray2);
+}
+.main{
+    padding: var(--containerPadding);
+}
+.navigation{
+    @extend .verticalHorizontal;
+    position: relative;
+    z-index: 1;
+    > a{
+        display: flex;
+    }
+    .logo{
+        width: 100%;
+        max-width: 30px;
+    }
+    > button{
+        cursor: pointer;
+        position: relative;
+        background-color: transparent;
+        border-left: 0;
+        border-right: 0;
+        border-top: 0;
+        border-bottom: 2px solid black;
+        color: transparent;
+        width: 18px;
+        height: 18px;
+        outline: 0;
+        &::after,
+        &::before{
+            transition: var(--transition);;
+            content: '';
+            position: absolute;
+            width: 25px;
+            height: 2px;
+            border-radius: 2px;
+            background-color: black;
+            right: 0;
+        }
+        &::before{
+            top: 0;
+        }
+        &::after{
+            bottom: 6px;
+        }
+        &.active{
+            border-bottom: 0;
+            &::before{
+                top: 7px;
+                transform: rotate(45deg);
+                bottom: 0;
+                background-color: white;
+            }
+            &::after{
+                bottom: 0;
+                transform: rotate(-45deg);
+                top: 7px;
+                background-color: white;
+            }
+        }
+    }
+}
+.header{
+    transition: var(--transition) ease-in-out;
+    transition-delay: var(--transitionDelay1);
+    margin: 50px 0;
+    opacity: 1;
+    .title{
+        font-weight: 400;
+        margin: 0 0 30px;
+    }
+    .show &{
+        opacity: 0;
+        pointer-events: none;
+    }
+}
+.pills{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: space-between;
+    .pill{
+        padding: 7px 22px;
+        text-align: center;
+        background-color: white;
+        border-radius: 20px;
+        font-size: 14px;
+        font-weight: 700;
+        color: var(--txtcolo1);
+        transition: var(--transition);;
+        &:hover{
+            cursor: default;
+            background-color: rgba(28, 105, 212, .1);
+        }
+        &.active{
+            background-color: rgba(28, 105, 212,1);
+            color: white;
+        }
+    }
+}
+.card{
+    transition: var(--transition);
+    transition-delay: var(--transitionDelay2);
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 0px 0px 8px 4px rgba(0, 0, 0, 0.03);
+    overflow: hidden;
+    + .card{
+        margin-top: 30px;
+    }
+    &_top{
+        @extend .verticalHorizontal;
+        padding-left: 20px;
+        padding-top: 20px;
+        padding-right: 20px;
+        > .name{
+            font-size: 20px;
+        }
+        > span{
+            font-size: 14px;
+            background-color: var(--bg);
+            padding: 4px 11px;
+            border-radius: 20px;
+            font-weight: 700;
+            color: var(--txtcolo1);
+        }
+    }
+    &_mid{
+        padding: 20px;
+        text-align: center;
+        > img{
+            width: 100%;
+            max-width: 290px;
+        }
+    }
+    &_bottom{
+        padding: 20px;
+        background-color: var(--lightgray3);
+        @extend .verticalHorizontal;
+        > div{
+            @extend .verticalHorizontal;
+        }
+        > div > img{
+            width: 20px;
+        }
+        > div > small{
+            margin-left: 10px;
+            color: var(--txtcolo1);
+        }
+    }
+    .show &{
+        opacity: 0;
+        pointer-events: none;
+    }
+}
+.inner{
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: var(--width);
+    height: var(--height);
+    padding: var(--containerPadding);
+    transform: translate(100%, 0);
+    transition: var(--transition) ease-in-out;
+    transition-delay: var(--transitionDelay3);
+    background-color: rgba(28, 105, 212, 1);
+    margin-bottom: 80px;
+    &::before{
+        content: '';
+        background-color: white;
+        width: 100%;
+        height: 47%;
+        position: absolute;
+        left: 0;
+        bottom: -20px;
+        transition: var(--transition) ease-in-out;
+        transition-delay: calc(var(--transitionDelay3) + 400ms);
+        transform: skew(0deg, -5deg) translate(0, 100%);
+        z-index: -1;
+        .show &{
+            transform: skew(0deg, -5deg) translate(0, 0);
+        }
+    }
+    &_header{
+        @extend .verticalHorizontal;
+        transition: var(--transition) ease-in-out;
+        transition-delay: calc(var(--transitionDelay3) + 200ms);
+        opacity: 0;
+        margin-top: 80px;
+        > button{
+            background-color: transparent;
+            border: 0;
+            > img{
+                width: 20px;
+                height: 20px;
+            }
+        }
+        > span{
+            font-size: 14px;
+            background-color: rgba(white, 0.18);
+            padding: 4px 11px;
+            border-radius: 20px;
+            font-weight: 700;
+            color: white;
+        }
+        &-title{
+            color: white;
+            margin-left: 10px;
+            margin-right: auto;
+            margin-bottom: 0;
+            font-size: 2em;
+            margin-top: 0;
+        }
+        .show &{
+            opacity: 1;
+        }
+    }
+    &_body{
+        margin: 50px 0;
+        .car{
+            transform: rotate(-5deg) translate(0, 20px);
+            opacity: 0;
+            filter: drop-shadow(-9px 12px 6px rgba(0, 0, 0, 0.5));
+            width: 95%;
+            margin: auto;
+            display: block;
+            transition: calc(var(--transition) + 200ms) ease-in-out;
+            transition-delay: calc(var(--transitionDelay3) + 260ms);
+            .show &{
+                transform: rotate(-5deg) translate(0, 0);
+                opacity: 1;
+            }
+        }
+        .info{
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+            > div{
+                color: white;
+                font-weight: 700;
+                font-size: 24px;
+            }
+            > div > small{
+                display: block;
+                opacity: .5;
+                font-size: 12px;
+                margin-bottom: 5px;
+            }
+        }
+    }
+    .show &{
+        transform: translate(0, 0);
+    }
+    &_bottom{
+        margin-top: 80px;
+        .gallery{
+            display: flex;
+            justify-content: space-between;
+            > div{
+                width: 30%;
+                height: 170px;
+                transition: var(--transition) ease;
+                transition-delay: calc(var(--transitionDelay3) + 800ms);
+                transform: scale(0);
+                .show &{
+                    transform: scale(1);
+                }
+            }
+            > div > img{
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                border-radius: 8px;
+                box-shadow: 0px 0px 8px 4px rgba(0, 0, 0, 0.1);
+            }
+        }
+        > button{
+            width: 100%;
+            margin-top: 50px;
+            background-color: rgba(28, 105, 212,1);
+            border: 0;
+            padding: 20px;
+            font-size: 20px;
+            color: white;
+            border-radius: 5px;
+            transition: transform var(--transition) ease-in-out calc(var(--transitionDelay3) + 1s), background-color var(--transition) ease-in-out;
+            transform: scale(0);
+            &:hover{
+                background-color: rgba(28, 105, 212,.5);
+            }
+            .show &{
+                transform: scale(1);
+            }
+        }
+    }
+}

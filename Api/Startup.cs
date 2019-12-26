@@ -31,6 +31,9 @@ namespace Api
 
             services.AddDbContext<ApiContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("ApiContext")));
+
+            services.AddDbContext<DataBaseContext>(options =>
+                    options.UseSqlServer(Configuration.GetConnectionString("DataBaseContext")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

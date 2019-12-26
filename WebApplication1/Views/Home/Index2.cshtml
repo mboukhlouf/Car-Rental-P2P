@@ -1,0 +1,26 @@
+﻿ 
+@model IEnumerable<Api.Models.Annonce> 
+
+@{
+    ViewBag.Title = "www";
+}
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Marque)
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Marque)
+            </td>
+        </tr>
+    }
+
+</table>
