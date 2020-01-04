@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.29519.87
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Api", "Api\Api.csproj", "{C0EABD7C-103A-48D6-AFBD-C42838B1C31D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsommationApii", "ConsommationApii\ConsommationApii.csproj", "{C6FA6783-3CB1-454F-8BA1-B316B85C9DDE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LocationDeVoitures", "LocationDeVoitures\LocationDeVoitures.csproj", "{C6FA6783-3CB1-454F-8BA1-B316B85C9DDE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
