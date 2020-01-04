@@ -24,9 +24,36 @@ namespace Api.Controllers
 
         // GET: api/Advertisements
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Advertisement>>> GetAdvertisement()
+        public async Task<ActionResult<IEnumerable<Advertisement>>> GetAdvertisement(Filter filter)
         {
-            return await _context.Advertisement.ToListAsync();
+            var ads = _context.Advertisement.AsQueryable();
+
+            // Price filter
+            if (filter.MinPrice != null && filter.MaxPrice != null)
+            {
+                ads = ads.Where(ad => ad.Price >= filter.MinPrice && ad.Price <= filter.MaxPrice);
+            }
+
+            // Transmission filter
+            if (filter.Transmission != null)
+            {
+                ads = ads.Where(ad => ad.Transmission == filter.Transmission);
+            }
+
+            // Fuel Type filter
+            if (filter.FuelType != null)
+            {
+                ads = ads.Where(ad => ad.FuelType == filter.FuelType);
+            }
+
+                // Order by CreationDate
+            ads = ads.OrderByDescending(ad => ad.CreationTime);
+
+            // Count = 10
+            ads = ads.Skip(filter.Start)
+                .Take(filter.Count);
+
+            return await ads.ToListAsync();
         }
 
         // GET: api/Advertisements/5

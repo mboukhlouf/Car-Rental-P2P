@@ -24,10 +24,17 @@ namespace Api.Models
         public Uri ImageUri { get; set; }
 
         [Required]
+        [DataType(DataType.Currency)]
+        public int Price { get; set; }
+
+        [Required]
         public String Brand { get; set; }
 
         [Required]
         public String Model { get; set; }
+
+        [Required]
+        public FuelType FuelType { get; set; }
 
         [Required]
         public int Year { get; set; }
@@ -42,6 +49,8 @@ namespace Api.Models
         public int NumberDoors { get; set; }
 
         public bool IsActive { get; set; }
+
+        public DateTime CreationTime { get; set; }
 
         [Required]
         public User Owner { get; set; }
