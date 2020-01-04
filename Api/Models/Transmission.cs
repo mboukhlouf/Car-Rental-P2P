@@ -5,8 +5,9 @@ using System.Threading.Tasks;
 
 namespace Api.Models
 {
-    public class Locataire : Client
+    public enum Transmission
     {
-        public ICollection<Annonce> Annonces { get; set; }
+        Automatic,
+        Manual
     }
 }

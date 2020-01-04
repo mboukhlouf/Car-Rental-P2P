@@ -5,54 +5,56 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+
 using Api.Models;
+using Api.Data;
 
 namespace Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class LocatairesController : ControllerBase
+    public class AdvertisementsController : ControllerBase
     {
         private readonly ApiContext _context;
 
-        public LocatairesController(ApiContext context)
+        public AdvertisementsController(ApiContext context)
         {
             _context = context;
         }
 
-        // GET: api/Locataires
+        // GET: api/Advertisements
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Locataire>>> GetLocataire()
+        public async Task<ActionResult<IEnumerable<Advertisement>>> GetAdvertisement()
         {
-            return await _context.Locataire.ToListAsync();
+            return await _context.Advertisement.ToListAsync();
         }
 
-        // GET: api/Locataires/5
+        // GET: api/Advertisements/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Locataire>> GetLocataire(int id)
+        public async Task<ActionResult<Advertisement>> GetAdvertisement(int id)
         {
-            var locataire = await _context.Locataire.FindAsync(id);
+            var advertisement = await _context.Advertisement.FindAsync(id);
 
-            if (locataire == null)
+            if (advertisement == null)
             {
                 return NotFound();
             }
 
-            return locataire;
+            return advertisement;
         }
 
-        // PUT: api/Locataires/5
+        // PUT: api/Advertisements/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutLocataire(int id, Locataire locataire)
+        public async Task<IActionResult> PutAdvertisement(int id, Advertisement advertisement)
         {
-            if (id != locataire.Id)
+            if (id != advertisement.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(locataire).State = EntityState.Modified;
+            _context.Entry(advertisement).State = EntityState.Modified;
 
             try
             {
@@ -60,7 +62,7 @@ namespace Api.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!LocataireExists(id))
+                if (!AdvertisementExists(id))
                 {
                     return NotFound();
                 }
@@ -73,37 +75,37 @@ namespace Api.Controllers
             return NoContent();
         }
 
-        // POST: api/Locataires
+        // POST: api/Advertisements
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
         [HttpPost]
-        public async Task<ActionResult<Locataire>> PostLocataire(Locataire locataire)
+        public async Task<ActionResult<Advertisement>> PostAdvertisement(Advertisement advertisement)
         {
-            _context.Locataire.Add(locataire);
+            _context.Advertisement.Add(advertisement);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetLocataire", new { id = locataire.Id }, locataire);
+            return CreatedAtAction("GetAdvertisement", new { id = advertisement.Id }, advertisement);
         }
 
-        // DELETE: api/Locataires/5
+        // DELETE: api/Advertisements/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Locataire>> DeleteLocataire(int id)
+        public async Task<ActionResult<Advertisement>> DeleteAdvertisement(int id)
         {
-            var locataire = await _context.Locataire.FindAsync(id);
-            if (locataire == null)
+            var advertisement = await _context.Advertisement.FindAsync(id);
+            if (advertisement == null)
             {
                 return NotFound();
             }
 
-            _context.Locataire.Remove(locataire);
+            _context.Advertisement.Remove(advertisement);
             await _context.SaveChangesAsync();
 
-            return locataire;
+            return advertisement;
         }
 
-        private bool LocataireExists(int id)
+        private bool AdvertisementExists(int id)
         {
-            return _context.Locataire.Any(e => e.Id == id);
+            return _context.Advertisement.Any(e => e.Id == id);
         }
     }
 }

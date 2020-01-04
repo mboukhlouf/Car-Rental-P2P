@@ -5,54 +5,56 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+
 using Api.Models;
+using Api.Data;
 
 namespace Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ClientsController : ControllerBase
+    public class UsersController : ControllerBase
     {
         private readonly ApiContext _context;
 
-        public ClientsController(ApiContext context)
+        public UsersController(ApiContext context)
         {
             _context = context;
         }
 
-        // GET: api/Clients
+        // GET: api/Users
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Client>>> GetClient()
+        public async Task<ActionResult<IEnumerable<User>>> GetUser()
         {
-            return await _context.Client.ToListAsync();
+            return await _context.User.ToListAsync();
         }
 
-        // GET: api/Clients/5
+        // GET: api/Users/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Client>> GetClient(int id)
+        public async Task<ActionResult<User>> GetUser(int id)
         {
-            var client = await _context.Client.FindAsync(id);
+            var user = await _context.User.FindAsync(id);
 
-            if (client == null)
+            if (user == null)
             {
                 return NotFound();
             }
 
-            return client;
+            return user;
         }
 
-        // PUT: api/Clients/5
+        // PUT: api/Users/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutClient(int id, Client client)
+        public async Task<IActionResult> PutUser(int id, User user)
         {
-            if (id != client.Id)
+            if (id != user.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(client).State = EntityState.Modified;
+            _context.Entry(user).State = EntityState.Modified;
 
             try
             {
@@ -60,7 +62,7 @@ namespace Api.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!ClientExists(id))
+                if (!UserExists(id))
                 {
                     return NotFound();
                 }
@@ -73,37 +75,37 @@ namespace Api.Controllers
             return NoContent();
         }
 
-        // POST: api/Clients
+        // POST: api/Users
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
         [HttpPost]
-        public async Task<ActionResult<Client>> PostClient(Client client)
+        public async Task<ActionResult<User>> PostUser(User user)
         {
-            _context.Client.Add(client);
+            _context.User.Add(user);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetClient", new { id = client.Id }, client);
+            return CreatedAtAction("GetUser", new { id = user.Id }, user);
         }
 
-        // DELETE: api/Clients/5
+        // DELETE: api/Users/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Client>> DeleteClient(int id)
+        public async Task<ActionResult<User>> DeleteUser(int id)
         {
-            var client = await _context.Client.FindAsync(id);
-            if (client == null)
+            var user = await _context.User.FindAsync(id);
+            if (user == null)
             {
                 return NotFound();
             }
 
-            _context.Client.Remove(client);
+            _context.User.Remove(user);
             await _context.SaveChangesAsync();
 
-            return client;
+            return user;
         }
 
-        private bool ClientExists(int id)
+        private bool UserExists(int id)
         {
-            return _context.Client.Any(e => e.Id == id);
+            return _context.User.Any(e => e.Id == id);
         }
     }
 }

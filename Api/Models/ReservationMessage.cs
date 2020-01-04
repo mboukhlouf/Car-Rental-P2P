@@ -7,26 +7,19 @@ using System.Threading.Tasks;
 
 namespace Api.Models
 {
-    public class Reservation
+    public class ReservationMessage
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
         [Required]
-        [DataType(DataType.Date)]
-        public DateTime PickupDate { get; set; }
+        public String Content { get; set; }
 
-        [Required]
-        [DataType(DataType.Date)]
-        public DateTime DropOffDate { get; set; }
-
-        public ReservationState State { get; set; }
-
-        public Advertisement Advertisement { get; set; }
+        public DateTime DateTime { get; set; }
 
         public User User { get; set; }
 
-        public IEnumerable<ReservationMessage> Messages { get; set; }
+        public Reservation Reservation { get; set; }
     }
 }

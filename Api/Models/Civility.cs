@@ -5,10 +5,10 @@ using System.Threading.Tasks;
 
 namespace Api.Models
 {
-    public enum Civilite
+    public enum Civility
     {
-        Monsieur,
-        Madame,
-        Societe
+        Mr,
+        Mrs,
+        Company
     }
 }

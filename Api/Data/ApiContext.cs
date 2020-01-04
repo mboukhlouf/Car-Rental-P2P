@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Api.Models;
 
-namespace Api.Models
+namespace Api.Data
 {
     public class ApiContext : DbContext
     {
@@ -14,12 +14,12 @@ namespace Api.Models
         {
         }
 
-        public DbSet<Api.Models.Client> Client { get; set; }
+        public DbSet<User> User { get; set; }
 
-        public DbSet<Api.Models.Annonce> Annonce { get; set; }
+        public DbSet<Advertisement> Advertisement { get; set; }
 
-        public DbSet<Api.Models.Reservation> Reservation { get; set; }
+        public DbSet<Reservation> Reservation { get; set; }
 
-        public DbSet<Api.Models.Locataire> Locataire { get; set; }
+        public DbSet<ReservationMessage> ReservationMessage { get; set; }
     }
 }

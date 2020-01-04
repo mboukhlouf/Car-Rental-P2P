@@ -11,7 +11,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
+
 using Api.Models;
+using Api.Data;
 
 namespace Api
 {
@@ -31,9 +33,6 @@ namespace Api
 
             services.AddDbContext<ApiContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("ApiContext")));
-
-            services.AddDbContext<DataBaseContext>(options =>
-                    options.UseSqlServer(Configuration.GetConnectionString("DataBaseContext")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
