@@ -10,7 +10,7 @@ using Api.Models;
 using System.Net.Http;
 using Newtonsoft.Json;
 using System.Net.Http.Headers;
-
+using ConsommationApii.ViewModels;
 namespace ConsommationApii.Controllers
 {
     public class HomeController : Controller
@@ -41,8 +41,8 @@ namespace ConsommationApii.Controllers
         public async Task<ActionResult> Index()
         {
 
-            
-            List < Annonce > EmpInfo = new List<Annonce>();
+
+            List<Annonce> EmpInfo = new List<Annonce>();
             using (var client = new HttpClient())
             {
 
@@ -56,10 +56,16 @@ namespace ConsommationApii.Controllers
                     EmpInfo = JsonConvert.DeserializeObject<List<Annonce>>(EmpResponse);
 
                 }
-
-                return View(EmpInfo);
             }
+            HomeViewModel model = new HomeViewModel
+            {
+                CurrentPage = 10,
+                MaxPage = 100
+            };
+            return View(EmpInfo);
         }
+
+
         [HttpGet]
         public ActionResult create() { return View(); }
         [HttpPost]
