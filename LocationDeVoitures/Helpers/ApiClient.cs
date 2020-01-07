@@ -81,6 +81,25 @@ namespace LocationDeVoitures.Helpers
             return false;
         }
 
+        public async Task<User> GetUser()
+        {
+            Endpoint endpoint = ApiHelper.TokenEndpoint;
+            using var message = new HttpRequestMessage
+            {
+                RequestUri = endpoint.Uri,
+                Method = HttpMethod.Get
+            };
+
+            using var response = await SendAsync(endpoint, message);
+            if (response.IsSuccessStatusCode)
+            {
+                var body = await response.Content.ReadAsStringAsync();
+                return JsonConvert.DeserializeObject<User>(body);
+            }
+
+            return null;
+        }
+
         public async Task<AdvertisementsBindingModel> GetAdvertisements(Filter filter)
         {
             Endpoint endpoint = ApiHelper.AdvertisementsEndpoint;

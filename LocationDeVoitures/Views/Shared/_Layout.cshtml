@@ -7,12 +7,13 @@
     <title>@ViewData["Title"] Location</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/css/Footer-Basic.css" />
 </head>
 <body>
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Advertisements" asp-action="Index">Location</a>
+                <a class="navbar-brand" asp-area="" asp-controller="" asp-action="Index">Location</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -22,9 +23,18 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Advertisements" asp-action="Index">Home</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Advertisements" asp-action="Privacy">Privacy</a>
-                        </li>
+                        <li>@Html.ActionLink("Advertisements", "Index", "Advertisements")</li>
+                        @if (Model.User == null)
+                        {
+                            <li>@Html.ActionLink("Login", "Login", "Authentication")</li>
+                            <li>@Html.ActionLink("Register", "Register", "Authentication")</li>
+                        }
+                        else
+                        {
+                            <li>@Html.ActionLink("Dashboard", "Index", "Dashboard")</li>
+                            <li>@Html.ActionLink("Post an advertisement", "Add", "Advertisements")</li>
+                            <li>@Html.ActionLink("Logout", "Logout", "Authentication")</li>
+                        }
                     </ul>
                 </div>
             </div>
@@ -36,11 +46,19 @@
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy;  <a asp-area="" asp-controller="Advertisements" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>
+    <div class="footer-basic">
+        <footer>
+            <div class="social"><a href="#"><i class="icon ion-social-instagram"></i></a><a href="#"><i class="icon ion-social-snapchat"></i></a><a href="#"><i class="icon ion-social-twitter"></i></a><a href="#"><i class="icon ion-social-facebook"></i></a></div>
+            <ul class="list-inline">
+                <li class="list-inline-item"><a href="#">Home</a></li>
+                <li class="list-inline-item"><a href="#">Services</a></li>
+                <li class="list-inline-item"><a href="#">About</a></li>
+                <li class="list-inline-item"><a href="#">Terms</a></li>
+                <li class="list-inline-item"><a href="#">Privacy Policy</a></li>
+            </ul>
+            <p class="copyright">Company Name © 2017</p>
+        </footer>
+    </div>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

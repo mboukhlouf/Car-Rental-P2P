@@ -28,6 +28,18 @@ namespace Api.Controllers
             usersRepository = new UsersRepository(context);
         }
         
+        // GET: api/token
+        [HttpGet]
+        public async Task<ActionResult<User>> GetUser()
+        {
+            UserClaims userClaims = UserClaims.FromClaimsPrincipal(User);
+            if (userClaims == null)
+            {
+                return Unauthorized();
+            }
+            return await usersRepository.GetByIdAsync(userClaims.Id);
+        }
+
         // POST: api/token
         [HttpPost]
         public ActionResult Authenticate(AuthenticationModel auth)

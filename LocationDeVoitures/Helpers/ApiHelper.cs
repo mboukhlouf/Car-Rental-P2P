@@ -12,10 +12,12 @@ namespace LocationDeVoitures.Helpers
         public static Dictionary<String, Endpoint> Endpoints = new Dictionary<string, Endpoint>
         {
             { "token", new Endpoint("Token", false) },
+            { "tokenGetUser", new Endpoint("Token", true) },
             { "advertisements", new Endpoint("api/Advertisements", false) }
         };
 
         public static Endpoint TokenEndpoint => Endpoints["token"];
+        public static Endpoint TokenGetUserEndpoint => Endpoints["token"];
         public static Endpoint AdvertisementsEndpoint => Endpoints["advertisements"];
     }
 
