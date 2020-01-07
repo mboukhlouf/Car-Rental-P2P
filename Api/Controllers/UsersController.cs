@@ -28,7 +28,6 @@ namespace Api.Controllers
         [Authorize]
         public async Task<ActionResult<IEnumerable<User>>> GetUser()
         {
-            HttpContext.User.
             return new ActionResult<IEnumerable<User>>(await usersRepository.ListAsync());
         }
 

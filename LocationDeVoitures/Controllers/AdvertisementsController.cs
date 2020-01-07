@@ -35,33 +35,17 @@ namespace LocationDeVoitures.Controllers
         public async Task<ActionResult> Index(int page = 1)
         {
             int count = 10;
-            AdvertisementsBindingModel responseModel = new AdvertisementsBindingModel();
-            using (var client = new HttpClient())
+            using var client = new ApiClient();
+            var filter = new Filter
             {
-                var filter = new Filter
-                {
-                    Start = 0,
-                    Count = count
-                };
+                Start = 0,
+                Count = count
+            };
 
-                HttpRequestMessage message = new HttpRequestMessage
-                {
-                    Method = HttpMethod.Get,
-                    RequestUri = ApiHelper.AdvertisementsUrl,
-                    Content = new StringContent(JsonConvert.SerializeObject(filter), Encoding.UTF8, "application/json")
-                };
-
-                using (message)
-                {
-                    using (var response = await client.SendAsync(message))
-                    {
-                        if (response.IsSuccessStatusCode)
-                        {
-                            var responseBody = response.Content.ReadAsStringAsync().Result;
-                            responseModel = JsonConvert.DeserializeObject<AdvertisementsBindingModel>(responseBody);
-                        }
-                    }
-                }
+            var responseModel = await client.GetAdvertisements(filter);
+            if (responseModel == null)
+            {
+                responseModel = new AdvertisementsBindingModel();
             }
 
             HomeViewModel model = new HomeViewModel

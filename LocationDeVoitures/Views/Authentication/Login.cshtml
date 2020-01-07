@@ -1,4 +1,4 @@
-﻿
+﻿@model LoginViewModel
 @{
     ViewData["Title"] = "Login";
 }
@@ -20,15 +20,15 @@
         </div>
 
         <!-- Login Form -->
-        <form>
-            <input type="text" id="login" class="fadeIn second" name="login" placeholder="Email">
-            <input type="text" id="password" class="fadeIn third" name="login" placeholder="password">
+        @using (Html.BeginForm()) 
+        {
+            @Html.TextBoxFor(model => model.Authentication.Username, new { id = "login", @class = "fadeIn second" })
+            @Html.PasswordFor(model => model.Authentication.Password, new { id = "login", @class = "fadeIn second" })
             <input type="submit" class="fadeIn fourth" value="Log In">
-        </form>
+        }
 
-        <!-- Remind Passowrd -->
         <div id="formFooter">
-            <a class="underlineHover" href="/Authentication/Register">You don't have an account ? Click here to reegister</a>
+            You don't have an account ? @Html.ActionLink("", "Register")
         </div>
 
     </div>

@@ -7,8 +7,33 @@ namespace LocationDeVoitures.Helpers
 {
     public class ApiHelper
     {
-        public static String BaseUrl => "https://localhost:44325";
+        public static Uri BaseUrl => new Uri("https://localhost:44325");
 
-        public static Uri AdvertisementsUrl = new Uri($"{BaseUrl}/api/Advertisements");
+        public static Dictionary<String, Endpoint> Endpoints = new Dictionary<string, Endpoint>
+        {
+            { "token", new Endpoint("Token", false) },
+            { "advertisements", new Endpoint("api/Advertisements", false) }
+        };
+
+        public static Endpoint TokenEndpoint => Endpoints["token"];
+        public static Endpoint AdvertisementsEndpoint => Endpoints["advertisements"];
+    }
+
+    public class Endpoint
+    {
+        public Uri Uri { get; }
+        public bool RequiresAuthorization { get; }
+
+        public Endpoint(String uri, bool requiresAuthorization)
+        {
+            Uri = new Uri(uri, UriKind.Relative);
+            RequiresAuthorization = requiresAuthorization;
+        }
+
+        public Endpoint(Uri uri, bool requiresAuthorization)
+        {
+            Uri = uri;
+            RequiresAuthorization = requiresAuthorization;
+        }
     }
 }
