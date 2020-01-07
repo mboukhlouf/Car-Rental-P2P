@@ -23,10 +23,17 @@ namespace LocationDeVoitures.Models
 
         public ReservationState State { get; set; }
 
+        public DateTime CreatedAt { get; set; }
+
         public Advertisement Advertisement { get; set; }
 
         public User User { get; set; }
 
         public IEnumerable<ReservationMessage> Messages { get; set; }
+
+        public Reservation()
+        {
+            CreatedAt = DateTime.Now;
+        }
     }
 }

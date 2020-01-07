@@ -46,8 +46,15 @@ namespace LocationDeVoitures.Models
         [DataType(DataType.Date)]
         public DateTime DateOfBirth { get; set; }
 
+        public DateTime CreatedAt { get; set; }
+
         public ICollection<Reservation> Reservations { get; set; }
 
         public ICollection<Advertisement> Advertisements { get; set; }
+
+        public User()
+        {
+            CreatedAt = DateTime.Now;
+        }
     }
 }

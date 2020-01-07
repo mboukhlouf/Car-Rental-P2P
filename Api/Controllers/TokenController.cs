@@ -27,7 +27,7 @@ namespace Api.Controllers
             this.config = config;
             usersRepository = new UsersRepository(context);
         }
-
+        
         // POST: api/token
         [HttpPost]
         public ActionResult Authenticate(AuthenticationModel auth)

@@ -50,11 +50,16 @@ namespace Api.Models
 
         public bool IsActive { get; set; }
 
-        public DateTime CreationTime { get; set; }
+        public DateTime CreatedAt { get; set; }
 
         [Required]
         public User Owner { get; set; }
 
         public ICollection<Reservation> Reservations { get; set; }
+
+        public Advertisement()
+        {
+            CreatedAt = DateTime.Now;
+        }
     }
 }

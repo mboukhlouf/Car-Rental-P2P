@@ -83,7 +83,6 @@ namespace LocationDeVoitures.Helpers
 
         public async Task<AdvertisementsBindingModel> GetAdvertisements(Filter filter)
         {
-            int count = 10;
             Endpoint endpoint = ApiHelper.AdvertisementsEndpoint;
             using var message = new HttpRequestMessage
             {

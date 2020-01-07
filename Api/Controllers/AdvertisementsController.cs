@@ -16,57 +16,25 @@ namespace Api.Controllers
     [ApiController]
     public class AdvertisementsController : ControllerBase
     {
-        private readonly ApiContext _context;
+        private readonly AdvertisementsRepository advertisementsRepository;
 
         public AdvertisementsController(ApiContext context)
         {
-            _context = context;
+            advertisementsRepository = new AdvertisementsRepository(context);
         }
 
         // GET: api/Advertisements
         [HttpGet]
         public async Task<ActionResult<AdvertisementsBindingModel>> GetAdvertisement(Filter filter)
         {
-            var ads = _context.Advertisement.AsQueryable();
-
-            // Price filter
-            if (filter.MinPrice != null && filter.MaxPrice != null)
-            {
-                ads = ads.Where(ad => ad.Price >= filter.MinPrice && ad.Price <= filter.MaxPrice);
-            }
-
-            // Transmission filter
-            if (filter.Transmission != null)
-            {
-                ads = ads.Where(ad => ad.Transmission == filter.Transmission);
-            }
-
-            // Fuel Type filter
-            if (filter.FuelType != null)
-            {
-                ads = ads.Where(ad => ad.FuelType == filter.FuelType);
-            }
-
-            // Order by CreationDate
-            ads = ads.OrderByDescending(ad => ad.CreationTime);
-
-            int totalCount = ads.Count();
-
-            ads = ads.Skip(filter.Start)
-                .Take(filter.Count);
-
-            return new AdvertisementsBindingModel
-            {
-                Count = totalCount,
-                Advertisements = await ads.ToListAsync()
-            };
+            return await advertisementsRepository.ListAsync(filter);
         }
 
         // GET: api/Advertisements/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Advertisement>> GetAdvertisement(int id)
         {
-            var advertisement = await _context.Advertisement.FindAsync(id);
+            var advertisement = await advertisementsRepository.GetByIdAsync(id);
 
             if (advertisement == null)
             {
@@ -87,15 +55,13 @@ namespace Api.Controllers
                 return BadRequest();
             }
 
-            _context.Entry(advertisement).State = EntityState.Modified;
-
             try
             {
-                await _context.SaveChangesAsync();
+                await advertisementsRepository.EditAsync(advertisement);
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!AdvertisementExists(id))
+                if (!advertisementsRepository.Exists(id))
                 {
                     return NotFound();
                 }
@@ -114,8 +80,7 @@ namespace Api.Controllers
         [HttpPost]
         public async Task<ActionResult<Advertisement>> PostAdvertisement(Advertisement advertisement)
         {
-            _context.Advertisement.Add(advertisement);
-            await _context.SaveChangesAsync();
+            await advertisementsRepository.AddAsync(advertisement);
 
             return CreatedAtAction("GetAdvertisement", new { id = advertisement.Id }, advertisement);
         }
@@ -124,21 +89,13 @@ namespace Api.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult<Advertisement>> DeleteAdvertisement(int id)
         {
-            var advertisement = await _context.Advertisement.FindAsync(id);
+            var advertisement = await advertisementsRepository.DeleteAsync(id);
             if (advertisement == null)
             {
                 return NotFound();
             }
 
-            _context.Advertisement.Remove(advertisement);
-            await _context.SaveChangesAsync();
-
             return advertisement;
-        }
-
-        private bool AdvertisementExists(int id)
-        {
-            return _context.Advertisement.Any(e => e.Id == id);
         }
     }
 }
