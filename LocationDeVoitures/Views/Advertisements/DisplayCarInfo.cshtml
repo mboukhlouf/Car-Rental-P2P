@@ -1,4 +1,5 @@
-﻿<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+﻿@model LocationDeVoitures.Models.Advertisement
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <!------ Include the above in your HEAD tag ---------->
@@ -32,12 +33,12 @@
                             </div>
                             <span class="review-no">41 reviews</span>
                         </div>
-                        <h5 class="price"> prix: <span class="text-color">180 DH</span></h5>
-                        <h5 class="price">Annee: <span class="text-color">2000</span></h5>
-                        <h5 class="price">Kilometrage: <span class="text-color">100</span></h5>
-                        <h5 class="price">Transmission: <span class="text-color">Automatique</span></h5>
-                        <h5 class="price">Nombre Porte: <span class="text-color">4</span></h5>
-                        <h5 class="price">Nom Locataire: <span class="text-color">El Azouzi</span></h5>
+                        <h5 class="price"> @Html.DisplayNameFor(x=>x.Price ) :<span class="text-color">@Model.Price</span></h5>
+                        <h5 class="price">@Html.DisplayNameFor(x=>x.Year)  :<span class="text-color">@Model.Year</span></h5>
+                        <h5 class="price">@Html.DisplayNameFor(x=>x.Mileage) : <span class="text-color">@Model.Mileage</span></h5>
+                        <h5 class="price">@Html.DisplayNameFor(x => x.Transmission) : <span class="text-color">@Model.Transmission</span></h5>
+                        <h5 class="price">@Html.DisplayNameFor(x => x.NumberDoors)  :<span class="text-color">@Model.NumberDoors</span></h5>
+                        <h5 class="price">@Html.DisplayNameFor(x => x.Owner.LastName) :<span class="text-color">@Model.Owner.LastName</span></h5>
                         <div class="action">
                             <button  class="add-to-cart btn btn-default" type="button">Details</button>
                         </div>
