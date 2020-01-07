@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 
 using Api.Models;
 using Api.Data;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Api.Controllers
 {
@@ -15,25 +16,27 @@ namespace Api.Controllers
     [ApiController]
     public class UsersController : ControllerBase
     {
-        private readonly ApiContext _context;
+        private readonly UsersRepository usersRepository;
 
         public UsersController(ApiContext context)
         {
-            _context = context;
+            usersRepository = new UsersRepository(context);
         }
 
         // GET: api/Users
         [HttpGet]
+        [Authorize]
         public async Task<ActionResult<IEnumerable<User>>> GetUser()
         {
-            return await _context.User.ToListAsync();
+            HttpContext.User.
+            return new ActionResult<IEnumerable<User>>(await usersRepository.ListAsync());
         }
 
         // GET: api/Users/5
         [HttpGet("{id}")]
         public async Task<ActionResult<User>> GetUser(int id)
         {
-            var user = await _context.User.FindAsync(id);
+            var user = await usersRepository.GetByIdAsync(id);
 
             if (user == null)
             {
@@ -54,15 +57,13 @@ namespace Api.Controllers
                 return BadRequest();
             }
 
-            _context.Entry(user).State = EntityState.Modified;
-
             try
             {
-                await _context.SaveChangesAsync();
+                await usersRepository.EditAsync(user);
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!UserExists(id))
+                if (!usersRepository.Exists(id))
                 {
                     return NotFound();
                 }
@@ -81,8 +82,7 @@ namespace Api.Controllers
         [HttpPost]
         public async Task<ActionResult<User>> PostUser(User user)
         {
-            _context.User.Add(user);
-            await _context.SaveChangesAsync();
+            await usersRepository.AddAsync(user);
 
             return CreatedAtAction("GetUser", new { id = user.Id }, user);
         }
@@ -91,21 +91,13 @@ namespace Api.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult<User>> DeleteUser(int id)
         {
-            var user = await _context.User.FindAsync(id);
+            var user = await usersRepository.DeleteAsync(id);
             if (user == null)
             {
                 return NotFound();
             }
 
-            _context.User.Remove(user);
-            await _context.SaveChangesAsync();
-
             return user;
-        }
-
-        private bool UserExists(int id)
-        {
-            return _context.User.Any(e => e.Id == id);
         }
     }
 }
