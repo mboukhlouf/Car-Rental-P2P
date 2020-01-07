@@ -43,7 +43,7 @@ namespace LocationDeVoitures.Controllers
             using var client = new ApiClient();
             var filter = new Filter
             {
-                Start = 0,
+                Start =(page - 1) * count,
                 Count = count
             };
 
@@ -55,7 +55,7 @@ namespace LocationDeVoitures.Controllers
 
             HomeViewModel model = new HomeViewModel
             {
-                CurrentPage = 1,
+                CurrentPage = page,
                 MaxPage = (responseModel.Count / count) + 1,
                 Advertisements = responseModel.Advertisements
             };
