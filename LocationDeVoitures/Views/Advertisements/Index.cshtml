@@ -1,4 +1,4 @@
-﻿@model IEnumerable<LocationDeVoitures.Models.Advertisement>
+﻿@model LocationDeVoitures.ViewModels.HomeViewModel
 
 @{
     ViewData["Title"] = "Home Page";
@@ -30,7 +30,7 @@
     </div>
 </div>
 <br />
-@foreach (var item in Model)
+@foreach (var item in Model.Advertisements)
 {
     @await Html.PartialAsync("DisplayCarInfo", item)
 

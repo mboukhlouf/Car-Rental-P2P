@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Api.BindingModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -24,7 +25,7 @@ namespace Api.Controllers
 
         // GET: api/Advertisements
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Advertisement>>> GetAdvertisement(Filter filter)
+        public async Task<ActionResult<AdvertisementsBindingModel>> GetAdvertisement(Filter filter)
         {
             var ads = _context.Advertisement.AsQueryable();
 
@@ -46,14 +47,19 @@ namespace Api.Controllers
                 ads = ads.Where(ad => ad.FuelType == filter.FuelType);
             }
 
-                // Order by CreationDate
+            // Order by CreationDate
             ads = ads.OrderByDescending(ad => ad.CreationTime);
 
-            // Count = 10
+            int totalCount = ads.Count();
+
             ads = ads.Skip(filter.Start)
                 .Take(filter.Count);
 
-            return await ads.ToListAsync();
+            return new AdvertisementsBindingModel
+            {
+                Count = totalCount,
+                Advertisements = await ads.ToListAsync()
+            };
         }
 
         // GET: api/Advertisements/5
