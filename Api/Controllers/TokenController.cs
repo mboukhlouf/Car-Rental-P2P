@@ -5,6 +5,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using Api.Authorization;
 using Api.Data;
 using Api.Models;
 using Microsoft.AspNetCore.Http;
@@ -46,13 +47,12 @@ namespace Api.Controllers
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config["Jwt:Key"]));
             var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
 
-            var claims = new[] {
-                new Claim(JwtRegisteredClaimNames.Sub, user.Id.ToString(), ClaimValueTypes.Integer),
-            };
+            UserClaims userClaims = new UserClaims(user.Id, user.Username, false);
 
-            var token = new JwtSecurityToken(
-                claims: claims,
-                expires: DateTime.Now.AddDays(3),
+            var token = new JwtSecurityToken(issuer: config["Jwt:Issuer"],
+                audience: config["Jwt:Issuer"],
+                claims: userClaims.Claims.Values,
+                expires: DateTime.Now.AddDays(365),
                 signingCredentials: credentials);
 
             return new JwtSecurityTokenHandler().WriteToken(token);

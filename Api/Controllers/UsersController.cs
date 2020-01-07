@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Api.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -25,9 +26,13 @@ namespace Api.Controllers
 
         // GET: api/Users
         [HttpGet]
-        [Authorize]
         public async Task<ActionResult<IEnumerable<User>>> GetUser()
         {
+            UserClaims userClaims = UserClaims.FromClaimsPrincipal(User);
+            if (userClaims == null || !userClaims.IsAdmin)
+            {
+                return Unauthorized();
+            }
             return new ActionResult<IEnumerable<User>>(await usersRepository.ListAsync());
         }
 
