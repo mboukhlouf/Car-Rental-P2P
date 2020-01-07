@@ -1,0 +1,52 @@
+body
+{
+    background-color:white !important;
+}
+button {
+    padding-right: 5px;
+    margin-left:100px;
+    color:aliceblue;
+    background-color:black;
+    border-radius:10px;
+    height:40px;
+    width:110px;
+}
+p {
+    margin-top:5px;
+    text-align: center;
+}
+.table{
+    margin-bottom:0px;margin-left:0px;
+    margin-right:0px;
+    padding-left:0px;
+    
+}
+.img-bordered
+{
+    margin-top:0px;
+}
+.row{
+    margin-bottom:20px;
+}
+.card-header
+{
+    text-align:center;
+}
+h3{
+    text-align:center;
+}
+
+.card-text{
+    text-align:center;
+}
+
+.display-3
+{
+    text-align:center;
+}
+i {
+   text-align:center;
+}
+text{
+    text-align:center;
+}
