@@ -13,34 +13,34 @@ namespace LocationDeVoitures.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
-        [Required]
+        [Required(ErrorMessage ="this field is requiered !")]
         public String Username { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "this field is requiered !")]
         [DataType(DataType.EmailAddress)]
         public String Email { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "this field is requiered !")]
         [DataType(DataType.Password)]
         public String Password { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "this field is requiered !")]
         public Civility Civility { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "this field is requiered !")]
         public String FirstName { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "this field is requiered !")]
         public String LastName{ get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "this field is requiered !")]
         public String Countrycode { get; set; }
 
         public String Address { get; set; }
 
         public String ZipCode { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "this field is requiered !")]
         public String City { get; set; }
 
         [DataType(DataType.Date)]
