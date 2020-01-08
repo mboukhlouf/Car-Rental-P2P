@@ -69,12 +69,12 @@ namespace LocationDeVoitures.Controllers
             {
                 RedirectToAction("Index", "Home");
             }
-            return View();
+            return View(new RegistrationViewModel());
         }
 
         // POST: Login
         [HttpPost]
-        public ActionResult Register(LoginViewModel auth)
+        public ActionResult Register(RegistrationViewModel registrationViewModel)
         {
             return RedirectToAction();
         }

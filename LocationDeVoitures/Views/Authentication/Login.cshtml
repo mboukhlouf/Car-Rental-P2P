@@ -9,28 +9,26 @@
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
 
-<div class="wrapper fadeInDown">
-    <div id="formContent">
-        <!-- Tabs Titles -->
-        <!-- Icon -->
-        <div class="fadeIn first">
+<div class="text-center">
+    <form class="form-signin">
+        <img class="mb-4" src="/docs/4.4/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
+        <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+        <label for="inputEmail" class="sr-only">Username</label>
+        @Html.TextBoxFor(model => model.Authentication.Username, new { id = "inputEmail", @class = "form-control", placeholder = "Username", required = "", autofocus = "" })
+        <label for="inputPassword" class="sr-only">Password</label>
+        @Html.PasswordFor(model => model.Authentication.Password, new { id = "inputPassword", @class = "form-control", placeholder = "Password", required = "" })
 
-            <h1>Log in</h1>
-
+        <div class="checkbox mb-3">
+            <label>
+                <input type="checkbox" value="remember-me"> Remember me
+            </label>
         </div>
 
-        <!-- Login Form -->
-        @using (Html.BeginForm()) 
-        {
-            @Html.TextBoxFor(model => model.Authentication.Username, new { id = "login", @class = "fadeIn second" })
-            @Html.PasswordFor(model => model.Authentication.Password, new { id = "login", @class = "fadeIn second" })
-            <input type="submit" class="fadeIn fourth" value="Log In">
-        }
+        <submit class="btn btn-lg btn-primary btn-block" type="submit">Log in</submit>
 
         <div id="formFooter">
             You don't have an account ? @Html.ActionLink("Click here to register", "Register")
         </div>
-
-    </div>
+    </form>
 </div>
 
