@@ -51,7 +51,7 @@ namespace LocationDeVoitures.Controllers
                 Response.Cookies.Append("token", client.Token);
                 return RedirectToAction("Index", "Advertisements");
             }
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Authentication");
         }
 
         // GET: Register

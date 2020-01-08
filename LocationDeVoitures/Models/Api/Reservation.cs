@@ -30,8 +30,7 @@ namespace LocationDeVoitures.Models.Api
 
         public Advertisement Advertisement { get; set; }
 
-        [Required]
-        public int UserId { get; set; }
+        public int? UserId { get; set; }
 
         public User User { get; set; }
 

@@ -1,9 +1,12 @@
-﻿using LocationDeVoitures.Models.Api;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Web;
+
+using LocationDeVoitures.Models.Api;
+using Microsoft.AspNetCore.Http;
 
 namespace LocationDeVoitures.ViewModels
 {
@@ -14,9 +17,7 @@ namespace LocationDeVoitures.ViewModels
 
         public String Description { get; set; }
 
-        [Required]
-        [DataType(DataType.ImageUrl)]
-        public Uri ImageUri { get; set; }
+        public IFormFile ImageFile { get; set; }
 
         [Required]
         [DataType(DataType.Currency)]
@@ -42,9 +43,5 @@ namespace LocationDeVoitures.ViewModels
 
         [Required]
         public int NumberDoors { get; set; }
-
-        public bool IsActive { get; set; }
-
-
     }
 }
