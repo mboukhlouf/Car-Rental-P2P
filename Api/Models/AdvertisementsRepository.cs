@@ -28,14 +28,12 @@ namespace Api.Models
         public async Task<IEnumerable<Advertisement>> ListAsync()
         {
             return await context.Advertisement
-                .Include(ad => ad.Owner)
                 .ToListAsync();
         }
 
         public async Task<IEnumerable<Advertisement>> ListAsync(Expression<Func<Advertisement, bool>> predicate)
         {
             return await context.Advertisement.Where(predicate)
-                .Include(ad => ad.Owner)
                 .ToListAsync();
         }
 
