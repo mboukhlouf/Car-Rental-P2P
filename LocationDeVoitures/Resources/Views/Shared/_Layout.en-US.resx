@@ -120,6 +120,9 @@
   <data name="Advertisements" xml:space="preserve">
     <value>Advertisements</value>
   </data>
+  <data name="Contact" xml:space="preserve">
+    <value>Contact</value>
+  </data>
   <data name="Dashbord" xml:space="preserve">
     <value>Dashbord</value>
   </data>

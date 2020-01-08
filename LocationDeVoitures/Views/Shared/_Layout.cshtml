@@ -1,5 +1,6 @@
 ﻿@model LocationDeVoitures.ViewModels.BaseViewModel
 @using Microsoft.AspNetCore.Mvc.Localization
+@using LocationDeVoitures.Helpers
 @inject IViewLocalizer _localizer
 <!DOCTYPE html>
 <html lang="en">
@@ -24,13 +25,18 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">@_localizer["home"]</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">@_localizer["Home"]</a>
                         </li>
                         <li>@Html.ActionLink(@_localizer["Advertisements"].Value, "Index", "Advertisements", "", new { @class = "nav-link text-dark" })</li>
                         @if (Model.User == null)
                         {
                             <li class="nav-item">@Html.ActionLink(@_localizer["Login"].Value, "Login", "Authentication", "", new { @class = "nav-link text-dark" })</li>
                             <li class="nav-item">@Html.ActionLink(@_localizer["Register"].Value, "Register", "Authentication", "", new { @class = "nav-link text-dark" })</li>
+                            <select onChange="window.location.href=this.value">
+                                <option value="" disabled selected>Select language</option>
+
+                                <option value="~?culture=en-US">A</option>
+                            </select>
                         }
                         else
                         {
@@ -50,6 +56,15 @@
         </main>
     </div>
 
+    <div>
+        <form action="" method="get">
+            <select name="culture" onchange="this.form.submit()">
+                <option>Select language</option>
+                <option value="en-US">English</option>
+                <option value="fr-FR">French</option>
+            </select>
+        </form>
+    </div>
     <div class="footer-basic">
         <footer>
             <div class="social">
@@ -58,10 +73,11 @@
                 <a target="_blank" href="https://www.twitter.com/M_Boukhlouf"><i class="fab fa-twitter"></i></a>
             </div>
             <ul class="list-inline">
-                <li class="list-inline-item">@Html.ActionLink("Home", "Index", "Home")</li>
-                <li class="list-inline-item">@Html.ActionLink("About", "About", "Home")</li>
-                <li class="list-inline-item">@Html.ActionLink("Team", "Team", "Home")</li>
-                <li class="list-inline-item">@Html.ActionLink("Contact", "Contact", "Home")</li>
+                <li class="list-inline-item">@Html.ActionLink(@_localizer["Home"].Value, "Index", "Home")</li>
+                <li class="list-inline-item">@Html.ActionLink(@_localizer["About"].Value, "About", "Home")</li>
+                <li class="list-inline-item">@Html.ActionLink(@_localizer["Team"].Value, "Team", "Home")</li>
+                <li class="list-inline-item">@Html.ActionLink(@_localizer["Contact"].Value, "Contact", "Home")</li>
+
             </ul>
             <p class="copyright">Car Rental P2P © 2020</p>
         </footer>
