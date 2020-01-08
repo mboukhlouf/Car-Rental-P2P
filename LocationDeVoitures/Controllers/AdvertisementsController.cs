@@ -15,16 +15,18 @@ using LocationDeVoitures.Helpers;
 using LocationDeVoitures.Models;
 using LocationDeVoitures.Models.Api;
 using LocationDeVoitures.ViewModels;
+using Microsoft.Extensions.Localization;
 
 namespace LocationDeVoitures.Controllers
 {
     public class AdvertisementsController : Controller
     {
         private readonly ILogger<AdvertisementsController> _logger;
+        private readonly IStringLocalizer<AdvertisementsController> _localizer;
 
-        public AdvertisementsController(ILogger<AdvertisementsController> logger)
+        public AdvertisementsController(IStringLocalizer<AdvertisementsController> localizer)
         {
-            _logger = logger;
+            IStringLocalizer<AdvertisementsController> _localizer = localizer;
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
