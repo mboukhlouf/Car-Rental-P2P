@@ -53,6 +53,8 @@ namespace Api.Models
         public DateTime CreatedAt { get; set; }
 
         [Required]
+        public int OwnerId { get; set; }
+
         public User Owner { get; set; }
 
         public ICollection<Reservation> Reservations { get; set; }

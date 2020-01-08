@@ -13,34 +13,29 @@ namespace Api.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
-        [Required(ErrorMessage = "this field is requiered !")]
+        [Required]
         public String Username { get; set; }
 
-        [Required(ErrorMessage = "this field is requiered !")]
+        [Required]
         [DataType(DataType.EmailAddress)]
         public String Email { get; set; }
 
-        [Required(ErrorMessage = "this field is requiered !")]
+        [Required]
         [DataType(DataType.Password)]
         public String Password { get; set; }
 
-        [Required(ErrorMessage = "this field is requiered !")]
         public Civility Civility { get; set; }
 
-        [Required(ErrorMessage = "this field is requiered !")]
         public String FirstName { get; set; }
 
-        [Required(ErrorMessage = "this field is requiered !")]
         public String LastName { get; set; }
 
-        [Required(ErrorMessage = "this field is requiered !")]
         public String Countrycode { get; set; }
 
         public String Address { get; set; }
 
         public String ZipCode { get; set; }
 
-        [Required(ErrorMessage = "this field is requiered !")]
         public String City { get; set; }
 
         [DataType(DataType.Date)]

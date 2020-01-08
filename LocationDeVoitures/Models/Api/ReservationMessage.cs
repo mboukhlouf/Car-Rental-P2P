@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace LocationDeVoitures.Models
+namespace LocationDeVoitures.Models.Api
 {
     public class ReservationMessage
     {
@@ -18,8 +18,13 @@ namespace LocationDeVoitures.Models
 
         public DateTime DateTime { get; set; }
 
+        [Required]
+        public int UserId { get; set; }
+
         public User User { get; set; }
 
+        [Required]
+        public int ReservationId { get; set; }
         public Reservation Reservation { get; set; }
     }
 }

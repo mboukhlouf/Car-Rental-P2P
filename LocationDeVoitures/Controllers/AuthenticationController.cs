@@ -5,6 +5,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using LocationDeVoitures.Helpers;
 using LocationDeVoitures.Models;
+using LocationDeVoitures.Models.Api;
 using LocationDeVoitures.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;

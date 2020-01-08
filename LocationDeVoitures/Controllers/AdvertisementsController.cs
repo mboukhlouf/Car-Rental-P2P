@@ -13,6 +13,7 @@ using System.Text;
 using LocationDeVoitures.BindingModels;
 using LocationDeVoitures.Helpers;
 using LocationDeVoitures.Models;
+using LocationDeVoitures.Models.Api;
 using LocationDeVoitures.ViewModels;
 
 namespace LocationDeVoitures.Controllers
@@ -35,18 +36,14 @@ namespace LocationDeVoitures.Controllers
         public async Task<ActionResult> Index(int page = 1)
         {
             using var client = new ApiClient();
-            User user = null;
-            if(Request.Cookies.ContainsKey("token"))
-            {
-                String token = Request.Cookies["token"];
-                client.Token = token;
-                user = await client.GetUser();
-            }
+            User user;
+            client.Token = Request.Cookies["token"]; ;
+            user = await client.GetUser();
 
             int count = 10;
             var filter = new Filter
             {
-                Start =(page - 1) * count,
+                Start = (page - 1) * count,
                 Count = count
             };
 

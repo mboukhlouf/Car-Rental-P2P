@@ -27,15 +27,15 @@
                         <li>@Html.ActionLink("Advertisements", "Index", "Advertisements")</li>
                         @if (Model.User == null)
                         {
-                            <li class="nav-item">@Html.ActionLink("Login", "Login", "Authentication")</li>
-                            <li class="nav-item">@Html.ActionLink("Register", "Register", "Authentication")</li>
+                            <li class="nav-item">@Html.ActionLink("Login", "Login", "Authentication", "", new { @class = "nav-link text-dark" })</li>
+                            <li class="nav-item">@Html.ActionLink("Register", "Register", "Authentication", "", new { @class = "nav-link text-dark" })</li>
                         }
                         else
                         {
-                            <li class="nav-item">Hello @Html.ActionLink(Model.User.Username, "Index", "Profile")</li>
-                            <li class="nav-item">@Html.ActionLink("Dashboard", "Index", "Dashboard")</li>
-                            <li class="nav-item">@Html.ActionLink("Post an advertisement", "Add", "Advertisements")</li>
-                            <li class="nav-item">@Html.ActionLink("Logout", "Logout", "Authentication")</li>
+                            <li class="nav-item">@Html.ActionLink("Dashboard", "Index", "Dashboard", "", new { @class = "nav-link text-dark" })</li>
+                            <li class="nav-item">@Html.ActionLink("Post an advertisement", "Add", "Advertisements", "", new { @class = "nav-link text-dark" })</li>
+                            <li class="nav-item">@Html.ActionLink(Model.User.Username, "Index", "Profile", "", new { @class = "nav-link text-dark" })</li>
+                            <li class="nav-item">@Html.ActionLink("Logout", "Logout", "Authentication", "", new { @class = "nav-link text-dark" })</li>
                         }
                     </ul>
                 </div>

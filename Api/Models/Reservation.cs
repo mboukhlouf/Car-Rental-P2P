@@ -25,7 +25,13 @@ namespace Api.Models
 
         public DateTime CreatedAt { get; set; }
 
+        [Required]
+        public int AdvertisementId { get; set; }
+
         public Advertisement Advertisement { get; set; }
+
+        [Required]
+        public int UserId { get; set; }
 
         public User User { get; set; }
 

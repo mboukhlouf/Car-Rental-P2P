@@ -13,11 +13,12 @@ namespace LocationDeVoitures.Helpers
         {
             { "token", new Endpoint("Token", false) },
             { "tokenGetUser", new Endpoint("Token", true) },
-            { "advertisements", new Endpoint("api/Advertisements", false) }
+            { "advertisements", new Endpoint("api/Advertisements", false) },
+            { "createUser", new Endpoint("api/Users", false) }
         };
 
         public static Endpoint TokenEndpoint => Endpoints["token"];
-        public static Endpoint TokenGetUserEndpoint => Endpoints["token"];
+        public static Endpoint TokenGetUserEndpoint => Endpoints["tokenGetUser"];
         public static Endpoint AdvertisementsEndpoint => Endpoints["advertisements"];
     }
 

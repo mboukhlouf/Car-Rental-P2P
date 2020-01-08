@@ -9,10 +9,8 @@ namespace Api.Models
 {
     public class RegistrationModel
     {
-
-
-        [Required(ErrorMessage = "this field is required !")]
-        [StringLength(7,MinimumLength =4, ErrorMessage ="the username must be ")]
+        [Required]
+        [StringLength(7, MinimumLength = 4, ErrorMessage = "the username must be ")]
         public String Username { get; set; }
 
         [Required(ErrorMessage = "this field is required !")]
@@ -23,10 +21,9 @@ namespace Api.Models
         [DataType(DataType.Password)]
         public String Password { get; set; }
 
-
         [Required(ErrorMessage = "this field is required !")]
         [DataType(DataType.Password)]
-        [Compare("Password", ErrorMessage ="The confirmation password does not match")]
+        [Compare("Password", ErrorMessage = "The confirmation password does not match")]
         public String PasswordConfirmation { get; set; }
 
         [Required(ErrorMessage = "this field is required !")]

@@ -6,7 +6,7 @@ using System.IO.Pipes;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace LocationDeVoitures.Models
+namespace LocationDeVoitures.Models.Api
 {
     public class Advertisement
     {
@@ -53,6 +53,8 @@ namespace LocationDeVoitures.Models
         public DateTime CreatedAt { get; set; }
 
         [Required]
+        public int OwnerId { get; set; }
+
         public User Owner { get; set; }
 
         public ICollection<Reservation> Reservations { get; set; }

@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace LocationDeVoitures.Models
+namespace LocationDeVoitures.Models.Api
 {
     public class AuthenticationModel
     {

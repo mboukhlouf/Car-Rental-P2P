@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using LocationDeVoitures.Helpers;
 using LocationDeVoitures.Models;
+using LocationDeVoitures.Models.Api;
 using LocationDeVoitures.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
@@ -14,13 +15,11 @@ namespace LocationDeVoitures.Controllers
         public async Task<IActionResult> Index()
         {
             using var client = new ApiClient();
-            User user = null;
-            if (Request.Cookies.ContainsKey("token"))
-            {
-                String token = Request.Cookies["token"];
-                client.Token = token;
-                user = await client.GetUser();
-            }
+            User user;
+            String token = Request.Cookies["token"];
+            client.Token = token;
+            user = await client.GetUser();
+
             return View(new BaseViewModel
             {
                 User = user

@@ -18,8 +18,13 @@ namespace Api.Models
 
         public DateTime DateTime { get; set; }
 
+        [Required]
+        public int UserId { get; set; }
+
         public User User { get; set; }
 
+        [Required]
+        public int ReservationId { get; set; }
         public Reservation Reservation { get; set; }
     }
 }

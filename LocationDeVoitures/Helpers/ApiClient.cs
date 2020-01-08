@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using LocationDeVoitures.BindingModels;
 using LocationDeVoitures.Models;
+using LocationDeVoitures.Models.Api;
 using Newtonsoft.Json;
 
 namespace LocationDeVoitures.Helpers
@@ -83,7 +84,7 @@ namespace LocationDeVoitures.Helpers
 
         public async Task<User> GetUser()
         {
-            Endpoint endpoint = ApiHelper.TokenEndpoint;
+            Endpoint endpoint = ApiHelper.TokenGetUserEndpoint;
             using var message = new HttpRequestMessage
             {
                 RequestUri = endpoint.Uri,
@@ -119,6 +120,11 @@ namespace LocationDeVoitures.Helpers
             }
 
             return null;
+        }
+
+        public async Task<bool> CreateUser(User user)
+        {
+            return true;
         }
 
         public Task<HttpResponseMessage> SendAsync(Endpoint endpoint, HttpRequestMessage message)
