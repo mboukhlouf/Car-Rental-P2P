@@ -7,7 +7,7 @@ using LocationDeVoitures.Models;
 
 namespace LocationDeVoitures.ViewModels
 {
-    public class HomeViewModel : BaseViewModel
+    public class AdvertisementsViewModel : BaseViewModel
     {
         public int CurrentPage { get; set; } = 1;
         public int MaxPage { get; set; } = 100;

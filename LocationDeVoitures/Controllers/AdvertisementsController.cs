@@ -32,15 +32,18 @@ namespace LocationDeVoitures.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-        public IActionResult landing_page()
-        {
-            return View();
-        }
-
         public async Task<ActionResult> Index(int page = 1)
         {
-            int count = 10;
             using var client = new ApiClient();
+            User user = null;
+            if(Request.Cookies.ContainsKey("token"))
+            {
+                String token = Request.Cookies["token"];
+                client.Token = token;
+                user = await client.GetUser();
+            }
+
+            int count = 10;
             var filter = new Filter
             {
                 Start =(page - 1) * count,
@@ -53,8 +56,9 @@ namespace LocationDeVoitures.Controllers
                 responseModel = new AdvertisementsBindingModel();
             }
 
-            HomeViewModel model = new HomeViewModel
+            AdvertisementsViewModel model = new AdvertisementsViewModel
             {
+                User = user,
                 CurrentPage = page,
                 MaxPage = (responseModel.Count / count) + 1,
                 Advertisements = responseModel.Advertisements

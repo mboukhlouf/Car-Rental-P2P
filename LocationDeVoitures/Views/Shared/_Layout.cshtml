@@ -1,4 +1,5 @@
-﻿
+﻿@model LocationDeVoitures.ViewModels.BaseViewModel
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -26,14 +27,15 @@
                         <li>@Html.ActionLink("Advertisements", "Index", "Advertisements")</li>
                         @if (Model.User == null)
                         {
-                            <li>@Html.ActionLink("Login", "Login", "Authentication")</li>
-                            <li>@Html.ActionLink("Register", "Register", "Authentication")</li>
+                            <li class="nav-item">@Html.ActionLink("Login", "Login", "Authentication")</li>
+                            <li class="nav-item">@Html.ActionLink("Register", "Register", "Authentication")</li>
                         }
                         else
                         {
-                            <li>@Html.ActionLink("Dashboard", "Index", "Dashboard")</li>
-                            <li>@Html.ActionLink("Post an advertisement", "Add", "Advertisements")</li>
-                            <li>@Html.ActionLink("Logout", "Logout", "Authentication")</li>
+                            <li class="nav-item">Hello @Html.ActionLink(Model.User.Username, "Index", "Profile")</li>
+                            <li class="nav-item">@Html.ActionLink("Dashboard", "Index", "Dashboard")</li>
+                            <li class="nav-item">@Html.ActionLink("Post an advertisement", "Add", "Advertisements")</li>
+                            <li class="nav-item">@Html.ActionLink("Logout", "Logout", "Authentication")</li>
                         }
                     </ul>
                 </div>

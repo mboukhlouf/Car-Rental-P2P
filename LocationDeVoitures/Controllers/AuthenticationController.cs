@@ -20,13 +20,23 @@ namespace LocationDeVoitures.Controllers
         }
 
         // GET: Login
-        public ActionResult Login()
+        public async Task<ActionResult> Login()
         {
-           /* if (Session["user"] != null)
+            using var client = new ApiClient();
+            User user = null;
+            if (Request.Cookies.ContainsKey("token"))
             {
-                return RedirectToAction("Index", "Home");
-            }*/
-            return View();
+                String token = Request.Cookies["token"];
+                client.Token = token;
+                user = await client.GetUser();
+            }
+
+            if (user != null)
+            {
+                RedirectToAction("Index", "Home");
+            }
+
+            return View(new LoginViewModel());
         }
 
         // POST: Login
@@ -40,12 +50,25 @@ namespace LocationDeVoitures.Controllers
                 Response.Cookies.Append("token", client.Token);
                 return RedirectToAction("Index", "Advertisements");
             }
-            return RedirectToAction("Index", "Authentication");
+            return RedirectToAction("Index", "Home");
         }
 
         // GET: Register
-        public ActionResult Register()
+        public async Task<ActionResult> Register()
         {
+            using var client = new ApiClient();
+            User user = null;
+            if (Request.Cookies.ContainsKey("token"))
+            {
+                String token = Request.Cookies["token"];
+                client.Token = token;
+                user = await client.GetUser();
+            }
+
+            if (user != null)
+            {
+                RedirectToAction("Index", "Home");
+            }
             return View();
         }
 
