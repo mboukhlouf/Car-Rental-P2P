@@ -86,9 +86,16 @@ namespace Api.Controllers
         [HttpPost]
         public async Task<ActionResult<User>> PostUser(User user)
         {
-            await usersRepository.AddAsync(user);
+            try
+            {
+                await usersRepository.AddAsync(user);
+                return CreatedAtAction("GetUser", new { id = user.Id }, user);
+            }
+            catch(Exception e)
+            {
+                return BadRequest();
+            }
 
-            return CreatedAtAction("GetUser", new { id = user.Id }, user);
         }
 
         // DELETE: api/Users/5

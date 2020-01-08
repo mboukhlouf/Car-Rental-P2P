@@ -41,7 +41,9 @@ namespace LocationDeVoitures.Models.Api
         [DataType(DataType.Date)]
         public DateTime DateOfBirth { get; set; }
 
-        public DateTime CreatedAt { get; set; }
+        [Required]
+        [DataType(DataType.Date)]
+        public DateTime CreatedAt { get; set; } = DateTime.Today;
 
         public ICollection<Reservation> Reservations { get; set; }
 

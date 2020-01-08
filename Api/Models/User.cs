@@ -41,7 +41,8 @@ namespace Api.Models
         [DataType(DataType.Date)]
         public DateTime DateOfBirth { get; set; }
 
-        public DateTime CreatedAt { get; set; }
+        [DataType(DataType.Date)]
+        public DateTime CreatedAt { get; set; } = DateTime.Today;
 
         public ICollection<Reservation> Reservations { get; set; }
 
