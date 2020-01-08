@@ -1,5 +1,6 @@
 ﻿@model LocationDeVoitures.ViewModels.BaseViewModel
-
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer _localizer
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,20 +24,20 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">@_localizer["home"]</a>
                         </li>
-                        <li>@Html.ActionLink("Advertisements", "Index", "Advertisements", "", new { @class = "nav-link text-dark" })</li>
+                        <li>@Html.ActionLink(@_localizer["Advertisements"].Value, "Index", "Advertisements", "", new { @class = "nav-link text-dark" })</li>
                         @if (Model.User == null)
                         {
-                            <li class="nav-item">@Html.ActionLink("Login", "Login", "Authentication", "", new { @class = "nav-link text-dark" })</li>
-                            <li class="nav-item">@Html.ActionLink("Register", "Register", "Authentication", "", new { @class = "nav-link text-dark" })</li>
+                            <li class="nav-item">@Html.ActionLink(@_localizer["Login"].Value, "Login", "Authentication", "", new { @class = "nav-link text-dark" })</li>
+                            <li class="nav-item">@Html.ActionLink(@_localizer["Register"].Value, "Register", "Authentication", "", new { @class = "nav-link text-dark" })</li>
                         }
                         else
                         {
-                            <li class="nav-item">@Html.ActionLink("Dashboard", "Index", "Dashboard", "", new { @class = "nav-link text-dark" })</li>
-                            <li class="nav-item">@Html.ActionLink("Post an advertisement", "Add", "Advertisements", "", new { @class = "nav-link text-dark" })</li>
+                            <li class="nav-item">@Html.ActionLink(@_localizer["Dashbord"].Value, "Index", "Dashboard", "", new { @class = "nav-link text-dark" })</li>
+                            <li class="nav-item">@Html.ActionLink(@_localizer["Post an advertisement"].Value, "Add", "Advertisements", "", new { @class = "nav-link text-dark" })</li>
                             <li class="nav-item">@Html.ActionLink(Model.User.Username, "Index", "Profile", "", new { @class = "nav-link text-dark" })</li>
-                            <li class="nav-item">@Html.ActionLink("Logout", "Logout", "Authentication", "", new { @class = "nav-link text-dark" })</li>
+                            <li class="nav-item">@Html.ActionLink(@_localizer["Logout"].Value, "Logout", "Authentication", "", new { @class = "nav-link text-dark" })</li>
                         }
                     </ul>
                 </div>
@@ -57,7 +58,7 @@
                 <a target="_blank" href="https://www.twitter.com/M_Boukhlouf"><i class="fab fa-twitter"></i></a>
             </div>
             <ul class="list-inline">
-                <li class="list-inline-item">@Html.ActionLink("Home","Index", "Home")</li>
+                <li class="list-inline-item">@Html.ActionLink("Home", "Index", "Home")</li>
                 <li class="list-inline-item">@Html.ActionLink("About", "About", "Home")</li>
                 <li class="list-inline-item">@Html.ActionLink("Team", "Team", "Home")</li>
                 <li class="list-inline-item">@Html.ActionLink("Contact", "Contact", "Home")</li>
