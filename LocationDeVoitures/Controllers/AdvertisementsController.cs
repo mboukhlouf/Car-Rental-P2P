@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -15,6 +16,9 @@ using LocationDeVoitures.Helpers;
 using LocationDeVoitures.Models;
 using LocationDeVoitures.Models.Api;
 using LocationDeVoitures.ViewModels;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Hosting.Internal;
 using Microsoft.Extensions.Localization;
 
 namespace LocationDeVoitures.Controllers
@@ -23,10 +27,12 @@ namespace LocationDeVoitures.Controllers
     {
         private readonly ILogger<AdvertisementsController> _logger;
         private readonly IStringLocalizer<AdvertisementsController> _localizer;
+        private readonly IHostingEnvironment _environment;
 
-        public AdvertisementsController(IStringLocalizer<AdvertisementsController> localizer)
+        public AdvertisementsController(IStringLocalizer<AdvertisementsController> localizer, IHostingEnvironment environment)
         {
             IStringLocalizer<AdvertisementsController> _localizer = localizer;
+            _environment = environment;
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
@@ -95,7 +101,61 @@ namespace LocationDeVoitures.Controllers
                 return RedirectToAction("Login", "Authentication");
             }
 
-            return RedirectToAction("Index", "Advertisements");
+            String imageUri;
+            try
+            {
+                imageUri = UploadImage(advertisementViewModel.ImageFile);
+            }
+            catch (Exception e)
+            {
+                imageUri = "/img/default.png";
+            }
+
+            Advertisement advertisement = new Advertisement()
+            {
+                Brand = advertisementViewModel.Brand,
+                Description = advertisementViewModel.Description,
+                FuelType = advertisementViewModel.FuelType,
+                Mileage = advertisementViewModel.Mileage,
+                Model = advertisementViewModel.Model,
+                NumberDoors = advertisementViewModel.NumberDoors,
+                Price = advertisementViewModel.Price,
+                Title = advertisementViewModel.Title,
+                Year = advertisementViewModel.Year,
+                Transmission = advertisementViewModel.Transmission,
+                ImageUri = imageUri,
+                IsActive = true,
+                OwnerId = user.Id
+            };
+
+            bool registrationResult = await client.CreateAdvertisementAsync(advertisement);
+            if (registrationResult)
+            {
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                return RedirectToAction();
+            }
+        }
+
+        public String UploadImage(IFormFile image)
+        {
+            String fileName = Path.GetFileNameWithoutExtension(image.FileName) + "_" + DateTimeOffset.UtcNow.ToUnixTimeMilliseconds() + Path.GetExtension(image.FileName);
+            String folder = Path.Combine(_environment.WebRootPath, "uploads");
+            if(!Directory.Exists(folder))
+            {
+                Directory.CreateDirectory(folder);
+            }
+
+            String path = Path.Combine(folder, fileName);
+            String uri = "/uploads/" + fileName;
+            using (FileStream fs = System.IO.File.Create(path))
+            {
+                image.CopyTo(fs);
+            }
+
+            return uri;
         }
     }
 }

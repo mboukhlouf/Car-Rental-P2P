@@ -12,7 +12,7 @@ namespace LocationDeVoitures.Models.Api
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
+        public int? Id { get; set; }
 
         [Required]
         public String Title { get; set; }
@@ -21,7 +21,7 @@ namespace LocationDeVoitures.Models.Api
 
         [Required]
         [DataType(DataType.ImageUrl)]
-        public Uri ImageUri { get; set; }
+        public String ImageUri { get; set; }
 
         [Required]
         [DataType(DataType.Currency)]

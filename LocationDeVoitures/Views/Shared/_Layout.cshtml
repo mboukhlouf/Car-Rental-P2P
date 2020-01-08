@@ -35,7 +35,7 @@
                         else
                         {
                             <li class="nav-item">@Html.ActionLink(@_localizer["Dashbord"].Value, "Index", "Dashboard", "", new { @class = "nav-link text-dark" })</li>
-                            <li class="nav-item">@Html.ActionLink(@_localizer["Post an advertisement"].Value, "Add", "Advertisements", "", new { @class = "nav-link text-dark" })</li>
+                            <li class="nav-item">@Html.ActionLink(@_localizer["Post an advertisement"].Value, "Post", "Advertisements", "", new { @class = "nav-link text-dark" })</li>
                             <li class="nav-item">@Html.ActionLink(Model.User.Username, "Index", "Profile", "", new { @class = "nav-link text-dark" })</li>
                             <li class="nav-item">@Html.ActionLink(@_localizer["Logout"].Value, "Logout", "Authentication", "", new { @class = "nav-link text-dark" })</li>
                         }

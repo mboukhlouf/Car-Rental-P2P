@@ -141,6 +141,26 @@ namespace LocationDeVoitures.Helpers
             return false;
         }
 
+        public async Task<bool> CreateAdvertisementAsync(Advertisement advertisement)
+        {
+            Endpoint endpoint = ApiHelper.AddAdvertisementEndpoint;
+            var jsonBody = JsonConvert.SerializeObject(advertisement);
+            using var message = new HttpRequestMessage
+            {
+                RequestUri = endpoint.Uri,
+                Method = HttpMethod.Post,
+                Content = new StringContent(jsonBody, Encoding.UTF8, "application/json")
+            };
+
+            using var response = await SendAsync(endpoint, message);
+            if (response.IsSuccessStatusCode)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
         public Task<HttpResponseMessage> SendAsync(Endpoint endpoint, HttpRequestMessage message)
         {
             // Accept-Encoding
