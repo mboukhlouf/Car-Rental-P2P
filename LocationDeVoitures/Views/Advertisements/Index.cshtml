@@ -3,33 +3,32 @@
 @{
     ViewData["Title"] = "Home Page";
 }
-<div class="container">
-    <div class="row">
-        <div class="col-xs-8 col-xs-offset-2">
-            <div class="input-group">
-                <div class="input-group-btn search-panel">
-                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                        <span id="search_concept">Filter by</span> <span class="caret"></span>
-                    </button>
-                    <ul class="dropdown-menu" role="menu">
-                        <li><a href="#contains">Contains</a></li>
-                        <li><a href="#its_equal">It's equal</a></li>
-                        <li><a href="#greather_than">Greather than ></a></li>
-                        <li><a href="#less_than">Less than < </a></li>
-                        <li class="divider"></li>
-                        <li><a href="#all">Anything</a></li>
-                    </ul>
+    <div class="container">
+        <h1>Filter</h1>
+        <form action="">
+            <div class="form-group">
+                <label><strong>Price range :</strong></label>
+                <div data-role="rangeslider">
+                    <input type="range" name="MinPrice" id="price-min" value="0" min="0" max="5000">
+                    <input type="range" name="MaxPrice" id="price-max" value="0" min="0" max="5000">
                 </div>
-                <input type="hidden" name="search_param" value="all" id="search_param">
-                <input type="text" class="form-control" name="x" placeholder="Search term...">
-                <span class="input-group-btn">
-
-                    <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search"></span></button>
-                </span>
             </div>
-        </div>
+            <div class="form-group">
+                <label><strong>Transmission :</strong></label>
+                <div class="form-check"><input type="radio" class="form-check-input" id="formCheck-2" /><label for="formCheck-2" class="form-check-label">Automatic</label></div>
+                <div class="form-check"><input type="radio" class="form-check-input" id="formCheck-1" /><label for="formCheck-1" class="form-check-label">Manual</label></div>
+            </div>
+            <div class="form-group">
+                <label><strong>Fuel type :</strong></label>
+                <div class="form-check"><input type="radio" class="form-check-input" id="formCheck-3" /><label for="formCheck-3" class="form-check-label">Gasoline</label></div>
+                <div class="form-check"><input type="radio" class="form-check-input" id="formCheck-4" /><label for="formCheck-4" class="form-check-label">Diesel</label></div>
+                <div class="form-check"><input type="radio" class="form-check-input" id="formCheck-5" /><label for="formCheck-5" class="form-check-label">Electric</label></div>
+                <div class="form-check"><input type="radio" class="form-check-input" id="formCheck-6" /><label for="formCheck-6" class="form-check-label">LPG</label></div>
+                <div class="form-check"><input type="radio" class="form-check-input" id="formCheck-7" /><label for="formCheck-7" class="form-check-label">Hybrid</label></div>
+            </div>
+            <div class="form-group"><input type="submit" class="btn btn-primary" /></div>
+        </form>
     </div>
-</div>
 <br />
 @foreach (var item in Model.Advertisements)
 {
