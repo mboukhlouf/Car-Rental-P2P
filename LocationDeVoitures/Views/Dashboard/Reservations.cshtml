@@ -1,0 +1,42 @@
+﻿@model LocationDeVoitures.ViewModels.Dashboard.ReservationsViewModel
+@{
+    ViewData["Title"] = "Advertisements";
+}
+
+<div class="container">
+    <h1>Dashboard</h1>
+    <h3>On this page you can view and manage your advertisements and reservations<br><br></h3>
+    <ul class="nav nav-tabs">
+        <li class="nav-item"><a class="nav-link" href="@Url.Action("Advertisements")">Advertisements</a></li>
+        <li class="nav-item"><a class="nav-link active" href="@Url.Action("Reservations")">Reservations</a></li>
+    </ul>
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Advertisement</th>
+                <th>Pick up date</th>
+                <th>Drop off date</th>
+                <th>Status</th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach (var reservation in Model.Reservations)
+            {
+                <tr>
+                    <td><a href="@Url.Action("Details", "Reservations")?id=@reservation.Id">@reservation.Id</a></td>
+                    <td><a href="@Url.Action("Details", "Advertisements")?id=@reservation.AdvertisementId">@reservation.AdvertisementId</a></td>
+                    <td>@reservation.PickupDate</td>
+                    <td>@reservation.DropOffDate</td>
+                    <td>@reservation.State</td>
+                </tr>
+            }
+            </tbody>
+        </table>
+        
+        <p>
+            <a class="pull-right btn btn-default" href="@Url.Action("Post", "Advertisements")"><i class="fa fa-plus"></i> Post an advertisement</a>
+        </p>
+    </div>
+</div>

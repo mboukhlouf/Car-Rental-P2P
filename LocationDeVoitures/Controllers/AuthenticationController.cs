@@ -29,7 +29,7 @@ namespace LocationDeVoitures.Controllers
             {
                 String token = Request.Cookies["token"];
                 client.Token = token;
-                user = await client.GetUser();
+                user = await client.GetUserAsync();
             }
 
             if (user != null)
@@ -45,7 +45,7 @@ namespace LocationDeVoitures.Controllers
         public async Task<ActionResult> Login(LoginViewModel auth)
         {
             using var client = new ApiClient();
-            bool result = await client.GetToken(auth.Authentication);
+            bool result = await client.GetTokenAsync(auth.Authentication);
             if (result)
             {
                 Response.Cookies.Append("token", client.Token);
@@ -60,7 +60,7 @@ namespace LocationDeVoitures.Controllers
             using var client = new ApiClient();
             User user = null;
             client.Token = Request.Cookies["token"];
-            user = await client.GetUser();
+            user = await client.GetUserAsync();
 
             if (user != null)
             {

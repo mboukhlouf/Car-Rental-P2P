@@ -1,0 +1,46 @@
+﻿@model LocationDeVoitures.ViewModels.Dashboard.AdvertisementsViewModel
+@{
+    ViewData["Title"] = "Advertisements";
+}
+
+<div class="container">
+    <h1>Dashboard</h1>
+    <h3>On this page you can view and manage your advertisements and reservations<br><br></h3>
+    <ul class="nav nav-tabs">
+        <li class="nav-item"><a class="nav-link active" href="@Url.Action("Advertisements")">Advertisements</a></li>
+        <li class="nav-item"><a class="nav-link" href="@Url.Action("Reservations")">Reservations</a></li>
+    </ul>
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Price</th>
+                <th>Brand</th>
+                <th>Model</th>
+                <th>Year</th>
+                <th>IsActive</th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach (var ad in Model.Advertisements)
+            {
+                <tr>
+                    <td><a href="@Url.Action("Details", "Advertisements")?id=@ad.Id">@ad.Id</a></td>
+                    <td>@ad.Title</td>
+                    <td>@ad.Price</td>
+                    <td>@ad.Brand</td>
+                    <td>@ad.Model</td>
+                    <td>@ad.Year</td>
+                    <td>@ad.IsActive</td>
+                </tr>
+            }
+            </tbody>
+        </table>
+        
+        <p>
+            <a class="pull-right btn btn-default" href="@Url.Action("Post", "Advertisements")">Check advertisements</a>
+        </p>
+    </div>
+</div>

@@ -13,16 +13,31 @@ namespace LocationDeVoitures.Helpers
         {
             { "token", new Endpoint("Token", false) },
             { "tokenGetUser", new Endpoint("Token", true) },
+
             { "advertisements", new Endpoint("api/Advertisements", false) },
             { "addAdvertisement", new Endpoint("api/Advertisements", false) },
-            { "createUser", new Endpoint("api/Users", false) }
+
+            { "addReservation", new Endpoint("api/Reservations", false) },
+            { "userReservations", new Endpoint("api/UserReservations", false) },
+
+            { "createUser", new Endpoint("api/Users", false) },
+            { "Users", new Endpoint("api/Users", false)},
+            { "UserAdvertisements", new Endpoint("api/UserAdvertisements", false)},
         };
 
+        public static Endpoint UsersEndpoint => Endpoints["Users"];
         public static Endpoint TokenEndpoint => Endpoints["token"];
         public static Endpoint TokenGetUserEndpoint => Endpoints["tokenGetUser"];
+
         public static Endpoint AdvertisementsEndpoint => Endpoints["advertisements"];
-        public static Endpoint CreateUserEndpoint => Endpoints["createUser"];
         public static Endpoint AddAdvertisementEndpoint => Endpoints["addAdvertisement"];
+
+        public static Endpoint AddReservationEndpoint => Endpoints["addReservation"];
+        public static Endpoint UserReservationsEndpoint => Endpoints["userReservations"];
+
+
+        public static Endpoint CreateUserEndpoint => Endpoints["createUser"];
+        public static Endpoint UserAdvertisementsEndpoint => Endpoints["UserAdvertisements"];
     }
 
     public class Endpoint

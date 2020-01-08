@@ -61,7 +61,7 @@ namespace LocationDeVoitures.Helpers
             Dispose(false);
         }
 
-        public async Task<bool> GetToken(AuthenticationModel auth)
+        public async Task<bool> GetTokenAsync(AuthenticationModel auth)
         {
             Endpoint endpoint = ApiHelper.TokenEndpoint;
             using var message = new HttpRequestMessage
@@ -82,7 +82,7 @@ namespace LocationDeVoitures.Helpers
             return false;
         }
 
-        public async Task<User> GetUser()
+        public async Task<User> GetUserAsync()
         {
             Endpoint endpoint = ApiHelper.TokenGetUserEndpoint;
             using var message = new HttpRequestMessage
@@ -101,7 +101,67 @@ namespace LocationDeVoitures.Helpers
             return null;
         }
 
-        public async Task<AdvertisementsBindingModel> GetAdvertisements(Filter filter)
+        public async Task<User> GetUserAsync(int id)
+        {
+            Endpoint endpoint = ApiHelper.UsersEndpoint;
+            using var message = new HttpRequestMessage
+            {
+                Method = HttpMethod.Get,
+                RequestUri = new Uri(endpoint.Uri + $"/{id}", UriKind.Relative)
+            };
+
+            using var response = await SendAsync(endpoint, message);
+
+            if (response.IsSuccessStatusCode)
+            {
+                var responseBody = response.Content.ReadAsStringAsync().Result;
+                return JsonConvert.DeserializeObject<User>(responseBody);
+            }
+
+            return null;
+        }
+
+        public async Task<Advertisement> GetAdvertisementAsync(int id)
+        {
+            Endpoint endpoint = ApiHelper.AdvertisementsEndpoint;
+            using var message = new HttpRequestMessage
+            {
+                Method = HttpMethod.Get,
+                RequestUri = new Uri(endpoint.Uri + $"/{id}", UriKind.Relative)
+            };
+
+            using var response = await SendAsync(endpoint, message);
+
+            if (response.IsSuccessStatusCode)
+            {
+                var responseBody = response.Content.ReadAsStringAsync().Result;
+                return JsonConvert.DeserializeObject<Advertisement>(responseBody);
+            }
+
+            return null;
+        }
+
+        public async Task<IEnumerable<Advertisement>> GetUserAdvertisementsAsync(int ownerId)
+        {
+            Endpoint endpoint = ApiHelper.UserAdvertisementsEndpoint;
+            using var message = new HttpRequestMessage
+            {
+                Method = HttpMethod.Get,
+                RequestUri = new Uri(endpoint.Uri + $"/{ownerId}", UriKind.Relative)
+            };
+
+            using var response = await SendAsync(endpoint, message);
+
+            if (response.IsSuccessStatusCode)
+            {
+                var responseBody = response.Content.ReadAsStringAsync().Result;
+                return JsonConvert.DeserializeObject<IEnumerable<Advertisement>>(responseBody);
+            }
+
+            return null;
+        }
+
+        public async Task<AdvertisementsBindingModel> GetAdvertisementsAsync(Filter filter)
         {
             Endpoint endpoint = ApiHelper.AdvertisementsEndpoint;
             using var message = new HttpRequestMessage
@@ -159,6 +219,47 @@ namespace LocationDeVoitures.Helpers
             }
 
             return false;
+        }
+
+        public async Task<Reservation> AddReservationAsync(Reservation reservation)
+        {
+            Endpoint endpoint = ApiHelper.AddReservationEndpoint;
+            var jsonBody = JsonConvert.SerializeObject(reservation);
+            using var message = new HttpRequestMessage
+            {
+                RequestUri = endpoint.Uri,
+                Method = HttpMethod.Post,
+                Content = new StringContent(jsonBody, Encoding.UTF8, "application/json")
+            };
+
+            using var response = await SendAsync(endpoint, message);
+            if (response.IsSuccessStatusCode)
+            {
+                var responseBody = response.Content.ReadAsStringAsync().Result;
+                return JsonConvert.DeserializeObject<Reservation>(responseBody);
+            }
+
+            return null;
+        }
+
+        public async Task<IEnumerable<Reservation>> GetUserReservationsAsync(int userId)
+        {
+            Endpoint endpoint = ApiHelper.UserReservationsEndpoint;
+            using var message = new HttpRequestMessage
+            {
+                Method = HttpMethod.Get,
+                RequestUri = new Uri(endpoint.Uri + $"/{userId}", UriKind.Relative)
+            };
+
+            using var response = await SendAsync(endpoint, message);
+
+            if (response.IsSuccessStatusCode)
+            {
+                var responseBody = response.Content.ReadAsStringAsync().Result;
+                return JsonConvert.DeserializeObject<IEnumerable<Reservation>>(responseBody);
+            }
+
+            return null;
         }
 
         public Task<HttpResponseMessage> SendAsync(Endpoint endpoint, HttpRequestMessage message)

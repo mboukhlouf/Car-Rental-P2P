@@ -10,7 +10,7 @@ namespace LocationDeVoitures.ViewModels
     {
         public Advertisement Advertisement { get; set; }
 
-        public ReservationViewModel ReservationViewModel { get; set; }
+        public Reservation Reservation { get; set; }
 
     }
 }

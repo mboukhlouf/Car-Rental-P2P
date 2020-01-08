@@ -46,7 +46,7 @@ namespace LocationDeVoitures.Controllers
             using var client = new ApiClient();
             User user;
             client.Token = Request.Cookies["token"]; ;
-            user = await client.GetUser();
+            user = await client.GetUserAsync();
 
             int count = 10;
             var filter = new Filter
@@ -55,7 +55,7 @@ namespace LocationDeVoitures.Controllers
                 Count = count
             };
 
-            var responseModel = await client.GetAdvertisements(filter);
+            var responseModel = await client.GetAdvertisementsAsync(filter);
             if (responseModel == null)
             {
                 responseModel = new AdvertisementsBindingModel();
@@ -77,7 +77,7 @@ namespace LocationDeVoitures.Controllers
             using var client = new ApiClient();
             User user;
             client.Token = Request.Cookies["token"]; ;
-            user = await client.GetUser();
+            user = await client.GetUserAsync();
             if (user == null)
             {
                 return RedirectToAction("Login", "Authentication");
@@ -95,7 +95,7 @@ namespace LocationDeVoitures.Controllers
             using var client = new ApiClient();
             User user;
             client.Token = Request.Cookies["token"]; ;
-            user = await client.GetUser();
+            user = await client.GetUserAsync();
             if (user == null)
             {
                 return RedirectToAction("Login", "Authentication");
@@ -143,7 +143,7 @@ namespace LocationDeVoitures.Controllers
         {
             String fileName = Path.GetFileNameWithoutExtension(image.FileName) + "_" + DateTimeOffset.UtcNow.ToUnixTimeMilliseconds() + Path.GetExtension(image.FileName);
             String folder = Path.Combine(_environment.WebRootPath, "uploads");
-            if(!Directory.Exists(folder))
+            if (!Directory.Exists(folder))
             {
                 Directory.CreateDirectory(folder);
             }
@@ -156,6 +156,31 @@ namespace LocationDeVoitures.Controllers
             }
 
             return uri;
+        }
+
+        public async Task<IActionResult> Details(int id)
+        {
+            using var client = new ApiClient();
+            User user;
+            client.Token = Request.Cookies["token"]; ;
+            user = await client.GetUserAsync();
+
+            var advertisement = await client.GetAdvertisementAsync(id);
+            if (advertisement == null)
+            {
+                return NotFound();
+            }
+
+            advertisement.Owner = await client.GetUserAsync(advertisement.OwnerId);
+            return View(new DetailsViewModel
+            {
+                User = user,
+                Advertisement = advertisement,
+                Reservation = new Reservation
+                {
+                    AdvertisementId = advertisement.Id
+                }
+            });
         }
     }
 }

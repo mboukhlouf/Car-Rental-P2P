@@ -19,6 +19,11 @@ namespace Api.Models
             this.context = context;
         }
 
+        public IQueryable<Advertisement> AsQueryable()
+        {
+            return context.Advertisement.AsQueryable();
+        }
+
         public async Task<Advertisement> GetByIdAsync(int id)
         {
             var ad = await context.Advertisement.FindAsync(id);

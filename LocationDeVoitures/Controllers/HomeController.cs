@@ -18,7 +18,7 @@ namespace LocationDeVoitures.Controllers
             User user;
             String token = Request.Cookies["token"];
             client.Token = token;
-            user = await client.GetUser();
+            user = await client.GetUserAsync();
 
             return View(new BaseViewModel
             {
@@ -34,7 +34,7 @@ namespace LocationDeVoitures.Controllers
             User user;
             String token = Request.Cookies["token"];
             client.Token = token;
-            user = await client.GetUser();
+            user = await client.GetUserAsync();
 
             return View(new BaseViewModel
             {
@@ -50,7 +50,7 @@ namespace LocationDeVoitures.Controllers
             User user;
             String token = Request.Cookies["token"];
             client.Token = token;
-            user = await client.GetUser();
+            user = await client.GetUserAsync();
 
             return View(new BaseViewModel
             {
@@ -66,7 +66,7 @@ namespace LocationDeVoitures.Controllers
             User user;
             String token = Request.Cookies["token"];
             client.Token = token;
-            user = await client.GetUser();
+            user = await client.GetUserAsync();
 
             return View(new BaseViewModel
             {
