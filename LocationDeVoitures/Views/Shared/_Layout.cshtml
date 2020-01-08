@@ -22,9 +22,9 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Advertisements" asp-action="Index">Home</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
-                        <li>@Html.ActionLink("Advertisements", "Index", "Advertisements")</li>
+                        <li>@Html.ActionLink("Advertisements", "Index", "Advertisements", "", new { @class = "nav-link text-dark" })</li>
                         @if (Model.User == null)
                         {
                             <li class="nav-item">@Html.ActionLink("Login", "Login", "Authentication", "", new { @class = "nav-link text-dark" })</li>

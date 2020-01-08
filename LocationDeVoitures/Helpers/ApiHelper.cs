@@ -20,6 +20,7 @@ namespace LocationDeVoitures.Helpers
         public static Endpoint TokenEndpoint => Endpoints["token"];
         public static Endpoint TokenGetUserEndpoint => Endpoints["tokenGetUser"];
         public static Endpoint AdvertisementsEndpoint => Endpoints["advertisements"];
+        public static Endpoint CreateUserEndpoint => Endpoints["createUser"];
     }
 
     public class Endpoint

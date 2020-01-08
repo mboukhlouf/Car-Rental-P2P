@@ -122,9 +122,23 @@ namespace LocationDeVoitures.Helpers
             return null;
         }
 
-        public async Task<bool> CreateUser(User user)
+        public async Task<bool> CreateUserAsync(User user)
         {
-            return true;
+            Endpoint endpoint = ApiHelper.CreateUserEndpoint;
+            using var message = new HttpRequestMessage
+            {
+                RequestUri = endpoint.Uri,
+                Method = HttpMethod.Post,
+                Content = new StringContent(JsonConvert.SerializeObject(user), Encoding.UTF8, "application/json")
+            };
+
+            using var response = await SendAsync(endpoint, message);
+            if (response.IsSuccessStatusCode)
+            {
+                return true;
+            }
+
+            return false;
         }
 
         public Task<HttpResponseMessage> SendAsync(Endpoint endpoint, HttpRequestMessage message)

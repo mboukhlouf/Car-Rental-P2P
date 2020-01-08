@@ -59,12 +59,8 @@ namespace LocationDeVoitures.Controllers
         {
             using var client = new ApiClient();
             User user = null;
-            if (Request.Cookies.ContainsKey("token"))
-            {
-                String token = Request.Cookies["token"];
-                client.Token = token;
-                user = await client.GetUser();
-            }
+            client.Token = Request.Cookies["token"];
+            user = await client.GetUser();
 
             if (user != null)
             {
@@ -75,14 +71,42 @@ namespace LocationDeVoitures.Controllers
 
         // POST: Login
         [HttpPost]
-        public ActionResult Register(RegistrationViewModel registrationViewModel)
+        public async Task<ActionResult> Register(RegistrationViewModel registrationViewModel)
         {
-            return RedirectToAction();
+            using var client = new ApiClient();
+            User user = new User
+            {
+                Username = registrationViewModel.Registration.Username,
+                Password = registrationViewModel.Registration.Password,
+                Email = registrationViewModel.Registration.Email,
+                FirstName = registrationViewModel.Registration.FirstName,
+                LastName = registrationViewModel.Registration.LastName,
+                Civility = registrationViewModel.Registration.Civility,
+                Countrycode = registrationViewModel.Registration.Countrycode,
+                City = registrationViewModel.Registration.City,
+                Address = registrationViewModel.Registration.Address,
+                ZipCode = registrationViewModel.Registration.ZipCode,
+                DateOfBirth = registrationViewModel.Registration.DateOfBirth
+            };
+
+            bool registrationResult = await client.CreateUserAsync(user);
+            if (registrationResult)
+            {
+                return RedirectToAction("Login");
+            }
+            else
+            {
+                return RedirectToAction();
+            }
         }
 
         // GET: Logout
         public ActionResult Logout()
         {
+            Response.Cookies.Append("token", "", new CookieOptions
+            {
+                Expires = DateTimeOffset.Now.AddDays(-1)
+            });
             return RedirectToAction("Login", "Authentication");
         }
     }
