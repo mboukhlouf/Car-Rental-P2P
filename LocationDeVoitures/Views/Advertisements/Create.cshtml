@@ -1,11 +1,11 @@
 ﻿@using LocationDeVoitures.Models.Api
-@model LocationDeVoitures.Models.Api.Advertisement
+@model LocationDeVoitures.ViewModels.AdvertisementViewModel
 
 @{
-    ViewData["Title"] = "CreateAd";
+    ViewData["Title"] = "Post Advertisement";
 }
     
-<h1>CreateAd</h1>
+<h1>Create Advertisement</h1>
 
 <h4>Advertisement</h4>
 <hr />
@@ -13,11 +13,7 @@
     <div class="col-md-4">
         <form asp-action="CreateAd" class="form-horizontal">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-
-                <input asp-for="Id" type="hidden" class="form-control" />
-                <span asp-validation-for="Id" class="text-danger"></span>
-            </div>
+           
             <div class="form-group">
                 <label asp-for="Title" class="control-label">Title :</label>
                 <input asp-for="Title" class="form-control" />
@@ -41,8 +37,8 @@
             </div>
             <div class="form-group">
                 <label asp-for="FuelType" class="control-label"></label>
-                <select class="form-control asp-for="FuelType" asp-items="Html.GetEnumSelectList<FuelType>()">
-                    <option selected="selected" value="">select fuel type</option>
+                <select class="" asp-for="FuelType" asp-items="Html.GetEnumSelectList<FuelType>()">
+                    <option selected="selected" value="">Select fuel type</option>
                 </select>
                 <span asp-validation-for="FuelType" class="text-danger"></span>
             </div>
@@ -61,8 +57,8 @@
             <div class="form-group">
                 <label asp-for="Transmission" class="control-label"></label>
               
-                <select class="form-control asp-for="Transmission"  asp-items="Html.GetEnumSelectList<Transmission>()">
-                    <option selected="selected" value="">select transmission</option>
+                <select class="form-control" asp-for="Transmission"  asp-items="Html.GetEnumSelectList<Transmission>()">
+                    <option selected="selected" value="">Select transmission</option>
                 </select>
                 <span asp-validation-for="Transmission" class="text-danger"></span>
             </div>

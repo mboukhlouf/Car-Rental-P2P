@@ -62,9 +62,9 @@ namespace LocationDeVoitures.Controllers
             };
             return View(model);
         }
-        public IActionResult Details()
+       /* public IActionResult Details()
         {
-            return View();
-        }
+            return View(new DetailsViewModel());
+        }*/
     }
 }

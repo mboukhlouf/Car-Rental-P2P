@@ -44,7 +44,7 @@
 
             <div class="form-group">
                 <label asp-for="Registration.Civility" class="control-label">Civility :*</label>
-                <select class="form-control asp-for="Civility" asp-items="Html.GetEnumSelectList<Civility>()">
+                <select class="form-control" asp-for="Registration.Civility" asp-items="Html.GetEnumSelectList<Civility>()">
                     <option selected="selected" value="">select civility</option>
                 </select>
 
