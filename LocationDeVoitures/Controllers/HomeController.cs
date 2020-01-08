@@ -12,8 +12,56 @@ namespace LocationDeVoitures.Controllers
 {
     public class HomeController : Controller
     {
-        public async Task<IActionResult> Index()
+        public async Task<ActionResult> Index()
         {
+            using var client = new ApiClient();
+            User user;
+            String token = Request.Cookies["token"];
+            client.Token = token;
+            user = await client.GetUser();
+
+            return View(new BaseViewModel
+            {
+                User = user
+            });
+        }
+
+        public async Task<ActionResult> Team()
+        {
+            ViewBag.Message = "";
+
+            using var client = new ApiClient();
+            User user;
+            String token = Request.Cookies["token"];
+            client.Token = token;
+            user = await client.GetUser();
+
+            return View(new BaseViewModel
+            {
+                User = user
+            });
+        }
+
+        public async Task<ActionResult> About()
+        {
+            ViewBag.Message = "";
+
+            using var client = new ApiClient();
+            User user;
+            String token = Request.Cookies["token"];
+            client.Token = token;
+            user = await client.GetUser();
+
+            return View(new BaseViewModel
+            {
+                User = user
+            });
+        }
+
+        public async Task<ActionResult> Contact()
+        {
+            ViewBag.Message = "";
+
             using var client = new ApiClient();
             User user;
             String token = Request.Cookies["token"];

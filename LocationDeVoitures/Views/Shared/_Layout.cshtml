@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
     <link rel="stylesheet" href="~/css/Footer-Basic.css" />
+    <script src="https://kit.fontawesome.com/00a551c8a1.js" crossorigin="anonymous"></script>
 </head>
 <body>
     <header>
@@ -50,15 +51,18 @@
 
     <div class="footer-basic">
         <footer>
-            <div class="social"><a href="#"><i class="icon ion-social-instagram"></i></a><a href="#"><i class="icon ion-social-snapchat"></i></a><a href="#"><i class="icon ion-social-twitter"></i></a><a href="#"><i class="icon ion-social-facebook"></i></a></div>
+            <div class="social">
+                <a target="_blank" href="https://www.facebook.com/M.Boukhlouf"><i class="fab fa-facebook"></i></a>
+                <a target="_blank" href="https://www.instagram.com/M.Boukhlouf"><i class="fab fa-instagram"></i></a>
+                <a target="_blank" href="https://www.twitter.com/M_Boukhlouf"><i class="fab fa-twitter"></i></a>
+            </div>
             <ul class="list-inline">
-                <li class="list-inline-item"><a href="#">Home</a></li>
-                <li class="list-inline-item"><a href="#">Services</a></li>
-                <li class="list-inline-item"><a href="#">About</a></li>
-                <li class="list-inline-item"><a href="#">Terms</a></li>
-                <li class="list-inline-item"><a href="#">Privacy Policy</a></li>
+                <li class="list-inline-item">@Html.ActionLink("Home","Index", "Home")</li>
+                <li class="list-inline-item">@Html.ActionLink("About", "About", "Home")</li>
+                <li class="list-inline-item">@Html.ActionLink("Team", "Team", "Home")</li>
+                <li class="list-inline-item">@Html.ActionLink("Contact", "Contact", "Home")</li>
             </ul>
-            <p class="copyright">Company Name © 2017</p>
+            <p class="copyright">Car Rental P2P © 2020</p>
         </footer>
     </div>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
