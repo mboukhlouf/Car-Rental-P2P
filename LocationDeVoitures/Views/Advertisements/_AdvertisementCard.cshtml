@@ -1,4 +1,6 @@
 ﻿@model LocationDeVoitures.Models.Api.Advertisement
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer _localizer
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
@@ -34,11 +36,11 @@
                             </div>
                             <span class="review-no">41 reviews</span>
                         </div>
-                        <h5 class="price"> @Html.DisplayNameFor(x => x.Price) :<span class="text-color">@Model.Price</span></h5>
-                        <h5 class="price">@Html.DisplayNameFor(x => x.Year)  :<span class="text-color">@Model.Year</span></h5>
-                        <h5 class="price">@Html.DisplayNameFor(x => x.Mileage) : <span class="text-color">@Model.Mileage</span></h5>
-                        <h5 class="price">@Html.DisplayNameFor(x => x.Transmission) : <span class="text-color">@Model.Transmission</span></h5>
-                        <h5 class="price">@Html.DisplayNameFor(x => x.NumberDoors)  :<span class="text-color">@Model.NumberDoors</span></h5>
+                        <h5 class="price"> @_localizer["price"] :<span class="text-color">@Model.Price</span></h5>
+                        <h5 class="price"> @_localizer["year"]  :<span class="text-color">@Model.Year</span></h5>
+                        <h5 class="price"> @_localizer["mileage"]  : <span class="text-color">@Model.Mileage</span></h5>
+                        <h5 class="price"> @_localizer["transmission"]  : <span class="text-color">@Model.Transmission</span></h5>
+                        <h5 class="price">  @_localizer["nbDoors"]  :<span class="text-color">@Model.NumberDoors</span></h5>
                         <div class="action">
                             <button class="add-to-cart btn btn-default" type="button">Details</button>
                         </div>

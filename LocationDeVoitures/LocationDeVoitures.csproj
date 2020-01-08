@@ -18,7 +18,6 @@
   <ItemGroup>
     <Folder Include="Resources\Controllers\" />
     <Folder Include="Resources\Models\" />
-    <Folder Include="Resources\Views\Advertisements\" />
   </ItemGroup>
 
 </Project>
