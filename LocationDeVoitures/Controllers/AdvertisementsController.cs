@@ -62,13 +62,22 @@ namespace LocationDeVoitures.Controllers
             };
             return View(model);
         }
-        /* public IActionResult Details()
-         {
-             return View(new DetailsViewModel());
-         }*/
-        public IActionResult Create()
+
+        public async Task<IActionResult> Post()
         {
-            return View(new AdvertisementViewModel());
+            using var client = new ApiClient();
+            User user;
+            client.Token = Request.Cookies["token"]; ;
+            user = await client.GetUser();
+            if (user == null)
+            {
+                RedirectToAction("Login", "Authentication");
+            }
+
+            return View(new AdvertisementViewModel
+            {
+                User = user
+            });
         }
     }
 }

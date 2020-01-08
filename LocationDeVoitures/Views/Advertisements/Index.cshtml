@@ -32,7 +32,7 @@
 <br />
 @foreach (var item in Model.Advertisements)
 {
-    @await Html.PartialAsync("DisplayCarInfo", item)
+    @await Html.PartialAsync("_AdvertisementCard", item)
 
 }
 <nav aria-label="Page navigation example">
