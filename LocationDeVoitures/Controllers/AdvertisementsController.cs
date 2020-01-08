@@ -65,5 +65,9 @@ namespace LocationDeVoitures.Controllers
             };
             return View(model);
         }
+        public IActionResult Details()
+        {
+            return View();
+        }
     }
 }

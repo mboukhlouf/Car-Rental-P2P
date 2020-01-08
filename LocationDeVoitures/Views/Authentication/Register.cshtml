@@ -1,4 +1,4 @@
-﻿@model LocationDeVoitures.Models.User
+﻿@model RegistrationViewModel
 
 @{
     ViewData["Title"] = "Register";
@@ -15,79 +15,76 @@
 
         <form asp-action="Register">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+           
+
             <div class="form-group">
-                <input asp-for="Id" class="form-control" type="hidden" />
-                <span asp-validation-for="Id" class="text-danger"></span>
+                <label asp-for="Registration.Username" class="control-label">Username :*</label>
+                <input asp-for="Registration.Username" class="form-control" />
+                <span asp-validation-for="Registration.Username" class="text-danger"></span>
             </div>
 
             <div class="form-group">
-                <label asp-for="Username" class="control-label">Username :*</label>
-                <input asp-for="Username" class="form-control" />
-                <span asp-validation-for="Username" class="text-danger"></span>
+                <label asp-for="Registration.FirstName" class="control-label">First name :*</label>
+                <input asp-for="Registration.FirstName" class="form-control" />
+                <span asp-validation-for="Registration.FirstName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Registration.LastName" class="control-label">Last name :*</label>
+                <input asp-for="Registration.LastName" class="form-control" />
+                <span asp-validation-for="Registration.LastName" class="text-danger"></span>
             </div>
 
             <div class="form-group">
-                <label asp-for="FirstName" class="control-label">First name :*</label>
-                <input asp-for="FirstName" class="form-control" />
-                <span asp-validation-for="FirstName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="LastName" class="control-label">Last name :*</label>
-                <input asp-for="LastName" class="form-control" />
-                <span asp-validation-for="LastName" class="text-danger"></span>
-            </div>
-
-            <div class="form-group">
-                <label asp-for="DateOfBirth" class="control-label">Date of birth :</label>
-                <input asp-for="DateOfBirth" class="form-control" />
-                <span asp-validation-for="DateOfBirth" class="text-danger"></span>
+                <label asp-for="Registration.DateOfBirth" class="control-label">Date of birth :</label>
+                <input asp-for="Registration.DateOfBirth" class="form-control" />
+                <span asp-validation-for="Registration.DateOfBirth" class="text-danger"></span>
             </div>
 
 
             <div class="form-group">
-                <label asp-for="Civility" class="control-label">Civility :*</label>
+                <label asp-for="Registration.Civility" class="control-label">Civility :*</label>
                 <select class="form-control asp-for="Civility" asp-items="Html.GetEnumSelectList<Civility>()">
                     <option selected="selected" value="">select civility</option>
                 </select>
 
-                <span asp-validation-for="Civility" class="text-danger"></span>
+                <span asp-validation-for="Registration.Civility" class="text-danger"></span>
             </div>
 
 
 
 
             <div class="form-group">
-                <label asp-for="Email" class="control-label">Email :*</label>
-                <input asp-for="Email" class="form-control" />
-                <span asp-validation-for="Email" class="text-danger"></span>
+                <label asp-for="Registration.Email" class="control-label">Email :*</label>
+                <input asp-for="Registration.Email" class="form-control" />
+                <span asp-validation-for="Registration.Email" class="text-danger"></span>
             </div>
 
             <div class="form-group">
-                <label asp-for="Password" class="control-label">Password :*</label>
-                <input asp-for="Password" class="form-control" />
-                <span asp-validation-for="Password" class="text-danger"></span>
+                <label asp-for="Registration.Password" class="control-label">Password :*</label>
+                <input asp-for="Registration.Password" class="form-control" />
+                <span asp-validation-for="Registration.Password" class="text-danger"></span>
             </div>
 
 
             <div class="form-group">
-                <label asp-for="Countrycode" class="control-label">Country code :*</label>
-                <input asp-for="Countrycode" class="form-control" />
-                <span asp-validation-for="Countrycode" class="text-danger"></span>
+                <label asp-for="Registration.Countrycode" class="control-label">Country code :*</label>
+                <input asp-for="Registration.Countrycode" class="form-control" />
+                <span asp-validation-for="Registration.Countrycode" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Address" class="control-label">Adress :</label>
-                <input asp-for="Address" class="form-control" />
-                <span asp-validation-for="Address" class="text-danger"></span>
+                <label asp-for="Registration.Address" class="control-label">Adress :</label>
+                <input asp-for="Registration.Address" class="form-control" />
+                <span asp-validation-for="Registration.Address" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ZipCode" class="control-label">Zip code :</label>
-                <input asp-for="ZipCode" class="form-control" />
-                <span asp-validation-for="ZipCode" class="text-danger"></span>
+                <label asp-for="Registration.ZipCode" class="control-label">Zip code :</label>
+                <input asp-for="Registration.ZipCode" class="form-control" />
+                <span asp-validation-for="Registration.ZipCode" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="City" class="control-label">City :*</label>
-                <input asp-for="City" class="form-control" />
-                <span asp-validation-for="City" class="text-danger"></span>
+                <label asp-for="Registration.City" class="control-label">City :*</label>
+                <input asp-for="Registration.City" class="form-control" />
+                <span asp-validation-for="Registration.City" class="text-danger"></span>
             </div>
 
             <div class="form-group">
