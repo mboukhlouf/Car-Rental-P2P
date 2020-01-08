@@ -63,6 +63,7 @@ namespace LocationDeVoitures.Controllers
             return View(model);
         }
 
+        [HttpGet]
         public async Task<IActionResult> Post()
         {
             using var client = new ApiClient();
@@ -71,13 +72,28 @@ namespace LocationDeVoitures.Controllers
             user = await client.GetUser();
             if (user == null)
             {
-                RedirectToAction("Login", "Authentication");
+                return RedirectToAction("Login", "Authentication");
             }
 
             return View(new AdvertisementViewModel
             {
                 User = user
             });
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Post(AdvertisementViewModel advertisementViewModel)
+        {
+            using var client = new ApiClient();
+            User user;
+            client.Token = Request.Cookies["token"]; ;
+            user = await client.GetUser();
+            if (user == null)
+            {
+                return RedirectToAction("Login", "Authentication");
+            }
+
+            return RedirectToAction("Index", "Advertisements");
         }
     }
 }
