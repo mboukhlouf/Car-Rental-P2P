@@ -20,7 +20,6 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Hosting.Internal;
 using Microsoft.Extensions.Localization;
-
 namespace LocationDeVoitures.Controllers
 {
     public class AdvertisementsController : Controller
@@ -40,21 +39,25 @@ namespace LocationDeVoitures.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
-
-        public async Task<ActionResult> Index(int page = 1)
+        
+        public async Task<ActionResult> Index(Filter filter,int page=1)
         {
+
             using var client = new ApiClient();
             User user;
             client.Token = Request.Cookies["token"]; ;
             user = await client.GetUserAsync();
 
             int count = 10;
+            /*
             var filter = new Filter
             {
-                Start = (page - 1) * count,
-                Count = count
+            Start = (page - 1) * count,
+            Count = count
             };
-
+            */
+            filter.Count = count;
+            filter.Start = (page - 1) * count;
             var responseModel = await client.GetAdvertisementsAsync(filter);
             if (responseModel == null)
             {
@@ -64,7 +67,7 @@ namespace LocationDeVoitures.Controllers
             AdvertisementsViewModel model = new AdvertisementsViewModel
             {
                 User = user,
-                CurrentPage = page,
+                //CurrentPage = page,
                 MaxPage = (responseModel.Count / count) + 1,
                 Advertisements = responseModel.Advertisements
             };

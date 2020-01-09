@@ -3,45 +3,90 @@
 @{
     ViewData["Title"] = "Home Page";
 }
-    <div class="container">
-        <h1>Filter</h1>
-        <form action="">
-            <div class="form-group">
-                <label><strong>Price range :</strong></label>
-                <div data-role="rangeslider">
-                    <input type="range" name="MinPrice" id="price-min" value="0" min="0" max="5000">
-                    <input type="range" name="MaxPrice" id="price-max" value="0" min="0" max="5000">
+    <html>
+    <head>
+
+        <link href="~/css/Index.css" rel="stylesheet" />
+    </head>
+    <body>
+        <div class=" row">
+            <div class="column left" style="margin-top:10px;">
+                <div class="container">
+                    <h1>Filter</h1>
+
+                    @using(Html.BeginForm("Index", "Advertisements", FormMethod.Post))
+                    {
+                     <div class="form-group">
+                        <label><strong>Price range :</strong></label>
+                        <div data-role="rangeslider">
+                            <div>
+                                <label>Min Price</label>
+                                @Html.TextBoxFor(m => m.filter.MinPrice)
+
+                            </div>
+                            <div>
+                                <label>Max Price</label>
+                                @Html.TextBoxFor(m => m.filter.MaxPrice)
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label><strong>Transmission :</strong></label>
+                        <div>
+                          
+
+                            <select name="Transmission" id="Transmission">
+                                <option value="0">Automatic</option>
+                                <option value="1">Manual</option>
+                            </select>
+                        </div>
+
+                    </div>
+                    <div class="form-group">
+                        <label><strong>Fuel type :</strong></label>
+                        <div>
+                            <select name="Fuel">
+                                <option value="Gasoline">Gasoline</option>
+                                <option value="Disiel">Diesel</option>
+                                <option value="Electric">Electric</option>
+                                <option value="LPG"> LPG</option>
+                                <option value="Hybrid">Hybrid</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group"><input type="submit" class="btn btn-primary" value="Filter" /></div>
+                    }
+
+
                 </div>
             </div>
-            <div class="form-group">
-                <label><strong>Transmission :</strong></label>
-                <div class="form-check"><input type="radio" class="form-check-input" id="formCheck-2" /><label for="formCheck-2" class="form-check-label">Automatic</label></div>
-                <div class="form-check"><input type="radio" class="form-check-input" id="formCheck-1" /><label for="formCheck-1" class="form-check-label">Manual</label></div>
+            <br />
+            <br />
+            <br />
+            <div class="column right">
+                @foreach (var item in Model.Advertisements)
+                {
+                    @await Html.PartialAsync("_AdvertisementCard", item)
+                    <br><br>
+
+                }
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination">
+
+                        @for (int i = 1; i <= Model.MaxPage; i++)
+                        {
+
+                            <li class="page-item"><a class="page-link" href="Index?page=@i">@i</a></li>
+                        }
+                    </ul>
+                </nav>
             </div>
-            <div class="form-group">
-                <label><strong>Fuel type :</strong></label>
-                <div class="form-check"><input type="radio" class="form-check-input" id="formCheck-3" /><label for="formCheck-3" class="form-check-label">Gasoline</label></div>
-                <div class="form-check"><input type="radio" class="form-check-input" id="formCheck-4" /><label for="formCheck-4" class="form-check-label">Diesel</label></div>
-                <div class="form-check"><input type="radio" class="form-check-input" id="formCheck-5" /><label for="formCheck-5" class="form-check-label">Electric</label></div>
-                <div class="form-check"><input type="radio" class="form-check-input" id="formCheck-6" /><label for="formCheck-6" class="form-check-label">LPG</label></div>
-                <div class="form-check"><input type="radio" class="form-check-input" id="formCheck-7" /><label for="formCheck-7" class="form-check-label">Hybrid</label></div>
-            </div>
-            <div class="form-group"><input type="submit" class="btn btn-primary" /></div>
-        </form>
-    </div>
-<br />
-@foreach (var item in Model.Advertisements)
-{
-    @await Html.PartialAsync("_AdvertisementCard", item)
 
-}
-<nav aria-label="Page navigation example">
-    <ul class="pagination">
 
-        @for (int i = 1; i <= Model.MaxPage; i++)
-        {
 
-            <li class="page-item"><a class="page-link" href="Index?page=@i">@i</a></li>
-        }
-    </ul>
-</nav>
+
+      
+        </div>
+    </body>
+</html>

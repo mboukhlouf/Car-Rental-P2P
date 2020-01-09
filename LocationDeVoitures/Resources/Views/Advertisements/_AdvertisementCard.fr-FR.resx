@@ -117,19 +117,13 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="mileage" xml:space="preserve">
-    <value>kilometrage</value>
-  </data>
   <data name="nbDoors" xml:space="preserve">
-    <value>nombre de porte</value>
+    <value>Nombre de porte</value>
   </data>
   <data name="price" xml:space="preserve">
-    <value>prix</value>
+    <value>Prix</value>
   </data>
   <data name="transmission" xml:space="preserve">
-    <value>transmission</value>
-  </data>
-  <data name="year" xml:space="preserve">
-    <value>année</value>
+    <value>Transmission</value>
   </data>
 </root>
