@@ -17,6 +17,8 @@ namespace LocationDeVoitures.Helpers
             { "advertisements", new Endpoint("api/Advertisements", false) },
             { "addAdvertisement", new Endpoint("api/Advertisements", false) },
 
+            { "reservations", new Endpoint("api/Reservations", false) },
+            { "updateReservations", new Endpoint("api/Reservations", false) },
             { "addReservation", new Endpoint("api/Reservations", false) },
             { "userReservations", new Endpoint("api/UserReservations", false) },
 
@@ -32,6 +34,8 @@ namespace LocationDeVoitures.Helpers
         public static Endpoint AdvertisementsEndpoint => Endpoints["advertisements"];
         public static Endpoint AddAdvertisementEndpoint => Endpoints["addAdvertisement"];
 
+        public static Endpoint ReservationsEndpoint => Endpoints["reservations"];
+        public static Endpoint UpdateReservationsEndpoint => Endpoints["updateReservations"];
         public static Endpoint AddReservationEndpoint => Endpoints["addReservation"];
         public static Endpoint UserReservationsEndpoint => Endpoints["userReservations"];
 
