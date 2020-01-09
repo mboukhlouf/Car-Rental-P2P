@@ -97,7 +97,7 @@ namespace LocationDeVoitures.Controllers
         {
             using var client = new ApiClient();
             User user;
-            client.Token = Request.Cookies["token"]; ;
+            client.Token = Request.Cookies["token"];
             user = await client.GetUserAsync();
             if (user == null)
             {
@@ -178,7 +178,7 @@ namespace LocationDeVoitures.Controllers
 
             if (user.Id == advertisement.OwnerId)
             {
-                advertisement.Reservations = (ICollection<Reservation>) await client.GetAdvertisementReservations(advertisement.Id);
+                advertisement.Reservations = (ICollection<Reservation>) await client.GetAdvertisementReservations((int) advertisement.Id);
             }
 
             return View(new DetailsViewModel
@@ -187,7 +187,7 @@ namespace LocationDeVoitures.Controllers
                 Advertisement = advertisement,
                 Reservation = new Reservation
                 {
-                    AdvertisementId = advertisement.Id
+                    AdvertisementId = (int) advertisement.Id
                 }
             });
         }
