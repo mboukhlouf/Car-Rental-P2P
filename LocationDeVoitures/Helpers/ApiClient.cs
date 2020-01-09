@@ -221,6 +221,26 @@ namespace LocationDeVoitures.Helpers
             return false;
         }
 
+        public async Task<Reservation> GetReservationAsync(int id)
+        {
+            Endpoint endpoint = ApiHelper.ReservationsEndpoint;
+            using var message = new HttpRequestMessage
+            {
+                Method = HttpMethod.Get,
+                RequestUri = new Uri(endpoint.Uri + $"/{id}", UriKind.Relative)
+            };
+
+            using var response = await SendAsync(endpoint, message);
+
+            if (response.IsSuccessStatusCode)
+            {
+                var responseBody = response.Content.ReadAsStringAsync().Result;
+                return JsonConvert.DeserializeObject<Reservation>(responseBody);
+            }
+
+            return null;
+        }
+
         public async Task<Reservation> AddReservationAsync(Reservation reservation)
         {
             Endpoint endpoint = ApiHelper.AddReservationEndpoint;
@@ -242,6 +262,26 @@ namespace LocationDeVoitures.Helpers
             return null;
         }
 
+        public async Task<bool> UpdateReservation(Reservation reservation)
+        {
+            Endpoint endpoint = ApiHelper.UpdateReservationsEndpoint;
+            var jsonBody = JsonConvert.SerializeObject(reservation);
+            using var message = new HttpRequestMessage
+            {
+                RequestUri = new Uri(endpoint.Uri + $"/{reservation.Id}", UriKind.Relative),
+                Method = HttpMethod.Put,
+                Content = new StringContent(jsonBody, Encoding.UTF8, "application/json")
+            };
+
+            using var response = await SendAsync(endpoint, message);
+            if (response.IsSuccessStatusCode)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
         public async Task<IEnumerable<Reservation>> GetUserReservationsAsync(int userId)
         {
             Endpoint endpoint = ApiHelper.UserReservationsEndpoint;
@@ -249,6 +289,26 @@ namespace LocationDeVoitures.Helpers
             {
                 Method = HttpMethod.Get,
                 RequestUri = new Uri(endpoint.Uri + $"/{userId}", UriKind.Relative)
+            };
+
+            using var response = await SendAsync(endpoint, message);
+
+            if (response.IsSuccessStatusCode)
+            {
+                var responseBody = response.Content.ReadAsStringAsync().Result;
+                return JsonConvert.DeserializeObject<IEnumerable<Reservation>>(responseBody);
+            }
+
+            return null;
+        }
+
+        public async Task<IEnumerable<Reservation>> GetAdvertisementReservations(int advertisementId)
+        {
+            Endpoint endpoint = ApiHelper.AdvertisementReservationsEndpoint;
+            using var message = new HttpRequestMessage
+            {
+                Method = HttpMethod.Get,
+                RequestUri = new Uri(endpoint.Uri + $"/{advertisementId}", UriKind.Relative)
             };
 
             using var response = await SendAsync(endpoint, message);

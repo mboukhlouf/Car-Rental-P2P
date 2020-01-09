@@ -14,7 +14,7 @@
                 <div class="container">
                     <h1>Filter</h1>
 
-                    @using(Html.BeginForm("Index", "Advertisements", FormMethod.Post))
+                    @using(Html.BeginForm("Index", "Advertisements", FormMethod.Get))
                     {
                      <div class="form-group">
                         <label><strong>Price range :</strong></label>
@@ -47,11 +47,11 @@
                         <label><strong>Fuel type :</strong></label>
                         <div>
                             <select name="Fuel">
-                                <option value="Gasoline">Gasoline</option>
-                                <option value="Disiel">Diesel</option>
-                                <option value="Electric">Electric</option>
-                                <option value="LPG"> LPG</option>
-                                <option value="Hybrid">Hybrid</option>
+                                <option value="0">Gasoline</option>
+                                <option value="1">Diesel</option>
+                                <option value="2">Electric</option>
+                                <option value="3"> LPG</option>
+                                <option value="4">Hybrid</option>
                             </select>
                         </div>
                     </div>
@@ -77,16 +77,11 @@
                         @for (int i = 1; i <= Model.MaxPage; i++)
                         {
 
-                            <li class="page-item"><a class="page-link" href="Index?page=@i">@i</a></li>
+                            <li class="page-item"><a class="page-link" href="@Url.Action("Index", "Advertisements")?page=@i">@i</a></li>
                         }
                     </ul>
                 </nav>
             </div>
-
-
-
-
-      
         </div>
     </body>
 </html>
