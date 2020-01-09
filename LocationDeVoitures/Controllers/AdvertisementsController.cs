@@ -175,6 +175,12 @@ namespace LocationDeVoitures.Controllers
             }
 
             advertisement.Owner = await client.GetUserAsync(advertisement.OwnerId);
+
+            if (user.Id == advertisement.OwnerId)
+            {
+                advertisement.Reservations = (ICollection<Reservation>) await client.GetAdvertisementReservations(advertisement.Id);
+            }
+
             return View(new DetailsViewModel
             {
                 User = user,

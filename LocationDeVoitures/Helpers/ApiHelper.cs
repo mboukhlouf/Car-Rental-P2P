@@ -24,7 +24,10 @@ namespace LocationDeVoitures.Helpers
 
             { "createUser", new Endpoint("api/Users", false) },
             { "Users", new Endpoint("api/Users", false)},
+
             { "UserAdvertisements", new Endpoint("api/UserAdvertisements", false)},
+
+            { "AdvertisementReservations", new Endpoint("api/AdvertisementReservations", false)},
         };
 
         public static Endpoint UsersEndpoint => Endpoints["Users"];
@@ -42,6 +45,7 @@ namespace LocationDeVoitures.Helpers
 
         public static Endpoint CreateUserEndpoint => Endpoints["createUser"];
         public static Endpoint UserAdvertisementsEndpoint => Endpoints["UserAdvertisements"];
+        public static Endpoint AdvertisementReservationsEndpoint => Endpoints["AdvertisementReservations"];
     }
 
     public class Endpoint

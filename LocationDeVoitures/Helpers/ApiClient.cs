@@ -302,6 +302,26 @@ namespace LocationDeVoitures.Helpers
             return null;
         }
 
+        public async Task<IEnumerable<Reservation>> GetAdvertisementReservations(int advertisementId)
+        {
+            Endpoint endpoint = ApiHelper.AdvertisementReservationsEndpoint;
+            using var message = new HttpRequestMessage
+            {
+                Method = HttpMethod.Get,
+                RequestUri = new Uri(endpoint.Uri + $"/{advertisementId}", UriKind.Relative)
+            };
+
+            using var response = await SendAsync(endpoint, message);
+
+            if (response.IsSuccessStatusCode)
+            {
+                var responseBody = response.Content.ReadAsStringAsync().Result;
+                return JsonConvert.DeserializeObject<IEnumerable<Reservation>>(responseBody);
+            }
+
+            return null;
+        }
+
         public Task<HttpResponseMessage> SendAsync(Endpoint endpoint, HttpRequestMessage message)
         {
             // Accept-Encoding

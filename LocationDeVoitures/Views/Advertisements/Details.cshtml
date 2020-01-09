@@ -39,3 +39,39 @@
 {
     @await Html.PartialAsync("_AddReservationCard", Model.Reservation)
 }
+
+@if (Model.User?.Id == Model.Advertisement.OwnerId)
+{
+    <div class="card">
+        <div class="card-header">
+            Reservations
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Advertisement</th>
+                        <th>Pick up date</th>
+                        <th>Drop off date</th>
+                        <th>Status</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @foreach (var reservation in Model.Advertisement.Reservations)
+                    {
+                        <tr>
+                            <td><a href="@Url.Action("Details", "Reservations")?id=@reservation.Id">@reservation.Id</a></td>
+                            <td><a href="@Url.Action("Details", "Advertisements")?id=@reservation.AdvertisementId">@reservation.AdvertisementId</a></td>
+                            <td>@reservation.PickupDate</td>
+                            <td>@reservation.DropOffDate</td>
+                            <td>@reservation.State</td>
+                        </tr>
+                    }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+}
