@@ -1,53 +1,36 @@
 ﻿@model LocationDeVoitures.Models.Api.Advertisement
 @using Microsoft.AspNetCore.Mvc.Localization
 @inject IViewLocalizer _localizer
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-<!------ Include the above in your HEAD tag ---------->
-<link href="~/css/site1 (2).css" rel="stylesheet" />
-<!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>details</title>
+    <link rel="stylesheet" href="bootstrap.min.css" />
+    <link rel="stylesheet" href="styles.css" />
+    <link href="~/css/Card.css" rel="stylesheet" />
 </head>
+
 <body>
-    ²
-    <div class="container">
-        <div class="card">
-            <div class="container-fliud">
-                <div class="wrapper row">
-                    <div class="preview col-md-6">
-                        <div class="preview-pic tab-content">
-                            <div class="tab-pane active" id="pic-1"><img src="@Model.ImageUri" height="250" width="200" /></div>
-                        </div>
-                    </div>
-                    <div class="details col-md-6">
-                        <h3 class="product-title">Marque-Modele</h3>
-                        <div class="rating">
-                            <div class="stars">
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star"></span>
-                                <span class="fa fa-star"></span>
-                            </div>
-                            <span class="review-no">41 reviews</span>
-                        </div>
-                        <h5 class="price"> @_localizer["price"] :<span class="text-color">@Model.Price</span></h5>
-                        <h5 class="price"> @_localizer["year"]  :<span class="text-color">@Model.Year</span></h5>
-                        <h5 class="price"> @_localizer["mileage"]  : <span class="text-color">@Model.Mileage</span></h5>
-                        <h5 class="price"> @_localizer["transmission"]  : <span class="text-color">@Model.Transmission</span></h5>
-                        <h5 class="price">  @_localizer["nbDoors"]  :<span class="text-color">@Model.NumberDoors</span></h5>
-                        <div class="action">
-                            <button class="add-to-cart btn btn-default" type="button">Details</button>
-                        </div>
-                    </div>
+    <div class="card">
+        <div class="card-body">
+            <div class="row">
+                <div class="col">
+                    <h1 ><strong>@Model.Title</strong></h1>
                 </div>
+            </div>
+            <div class="row">
+                <div class="col-xl-5"><img "@Model.ImageUri" />
+                    <p>@_localizer["price"] : @Model.Price</p>
+                    <p>@_localizer["transmission"]  :@Model.Transmission</p>
+                    <p>@_localizer["nbDoors"]  :@Model.NumberDoors</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col offset-xl-7"><button class="btn btn-primary" type="button">Button</button></div>
             </div>
         </div>
     </div>
 </body>
+
 </html>

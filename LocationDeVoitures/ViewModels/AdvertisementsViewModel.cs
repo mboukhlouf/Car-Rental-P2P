@@ -12,6 +12,7 @@ namespace LocationDeVoitures.ViewModels
     {
         public int CurrentPage { get; set; } = 1;
         public int MaxPage { get; set; } = 100;
+        public Filter filter { set; get; }
         public IEnumerable<Advertisement> Advertisements { get; set; }
         
     }
