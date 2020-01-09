@@ -32,11 +32,13 @@
                         {
                             <li class="nav-item">@Html.ActionLink(@_localizer["Login"].Value, "Login", "Authentication", "", new { @class = "nav-link text-dark" })</li>
                             <li class="nav-item">@Html.ActionLink(@_localizer["Register"].Value, "Register", "Authentication", "", new { @class = "nav-link text-dark" })</li>
-                            <select onChange="window.location.href=this.value">
-                                <option value="" disabled selected>Select language</option>
-
-                                <option value="~?culture=en-US">A</option>
-                            </select>
+                            <form action="" method="get">
+                                <select name="culture" onchange="this.form.submit()">
+                                    <option>Select language</option>
+                                    <option value="en-US">English</option>
+                                    <option value="fr-FR">French</option>
+                                </select>
+                            </form>
                         }
                         else
                         {
@@ -44,6 +46,13 @@
                             <li class="nav-item">@Html.ActionLink(@_localizer["Post an advertisement"].Value, "Post", "Advertisements", "", new { @class = "nav-link text-dark" })</li>
                             <li class="nav-item">@Html.ActionLink(Model.User.Username, "Index", "Profile", "", new { @class = "nav-link text-dark" })</li>
                             <li class="nav-item">@Html.ActionLink(@_localizer["Logout"].Value, "Logout", "Authentication", "", new { @class = "nav-link text-dark" })</li>
+                            <form action="" method="get">
+                                <select name="culture" onchange="this.form.submit()">
+                                    <option>Select language</option>
+                                    <option value="en-US">English</option>
+                                    <option value="fr-FR">French</option>
+                                </select>
+                            </form>
                         }
                     </ul>
                 </div>
@@ -57,13 +66,7 @@
     </div>
 
     <div>
-        <form action="" method="get">
-            <select name="culture" onchange="this.form.submit()">
-                <option>Select language</option>
-                <option value="en-US">English</option>
-                <option value="fr-FR">French</option>
-            </select>
-        </form>
+      
     </div>
     <div class="footer-basic">
         <footer>
@@ -77,7 +80,6 @@
                 <li class="list-inline-item">@Html.ActionLink(@_localizer["About"].Value, "About", "Home")</li>
                 <li class="list-inline-item">@Html.ActionLink(@_localizer["Team"].Value, "Team", "Home")</li>
                 <li class="list-inline-item">@Html.ActionLink(@_localizer["Contact"].Value, "Contact", "Home")</li>
-
             </ul>
             <p class="copyright">Car Rental P2P © 2020</p>
         </footer>

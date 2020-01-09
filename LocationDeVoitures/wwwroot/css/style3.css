@@ -4,10 +4,7 @@ body
 }
 button {
     padding-right: 5px;
-    margin-left:100px;
-    color:aliceblue;
-    background-color:black;
-    border-radius:10px;
+    margin-left:100px; 
     height:40px;
     width:110px;
 }
