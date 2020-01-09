@@ -1,0 +1,92 @@
+﻿@model CarRentalP2P.ViewModels.BaseViewModel
+@using Microsoft.AspNetCore.Mvc.Localization
+@using CarRentalP2P.Helpers
+@inject IViewLocalizer _localizer
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] | Car Rental P2P</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/css/Footer-Basic.css" />
+    <script src="https://kit.fontawesome.com/00a551c8a1.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container">
+                <a class="navbar-brand" asp-area="" asp-controller="" asp-action="Index">Car Rental P2P</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">@_localizer["Home"]</a>
+                        </li>
+                        <li>@Html.ActionLink(@_localizer["Advertisements"].Value, "Index", "Advertisements", "", new { @class = "nav-link text-dark" })</li>
+                        @if (Model.User == null)
+                        {
+                            <li class="nav-item">@Html.ActionLink(@_localizer["Login"].Value, "Login", "Authentication", "", new { @class = "nav-link text-dark" })</li>
+                            <li class="nav-item">@Html.ActionLink(@_localizer["Register"].Value, "Register", "Authentication", "", new { @class = "nav-link text-dark" })</li>
+                            <form action="" method="get">
+                                <select name="culture" onchange="this.form.submit()">
+                                    <option>Select language</option>
+                                    <option value="en-US">English</option>
+                                    <option value="fr-FR">French</option>
+                                </select>
+                            </form>
+                        }
+                        else
+                        {
+                            <li class="nav-item">@Html.ActionLink(@_localizer["Dashbord"].Value, "Index", "Dashboard", "", new { @class = "nav-link text-dark" })</li>
+                            <li class="nav-item">@Html.ActionLink(@_localizer["Post an advertisement"].Value, "Post", "Advertisements", "", new { @class = "nav-link text-dark" })</li>
+                            <li class="nav-item">@Html.ActionLink(Model.User.Username, "Index", "Profile", "", new { @class = "nav-link text-dark" })</li>
+                            <li class="nav-item">@Html.ActionLink(@_localizer["Logout"].Value, "Logout", "Authentication", "", new { @class = "nav-link text-dark" })</li>
+                            <form action="" method="get">
+                                <select name="culture" onchange="this.form.submit()">
+                                    <option>Select language</option>
+                                    <option value="en-US">English</option>
+                                    <option value="fr-FR">French</option>
+                                </select>
+                            </form>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <div>
+      
+    </div>
+    <div class="footer-basic">
+        <footer>
+            <div class="social">
+                <a target="_blank" href="https://www.facebook.com/M.Boukhlouf"><i class="fab fa-facebook"></i></a>
+                <a target="_blank" href="https://www.instagram.com/M.Boukhlouf"><i class="fab fa-instagram"></i></a>
+                <a target="_blank" href="https://www.twitter.com/M_Boukhlouf"><i class="fab fa-twitter"></i></a>
+            </div>
+            <ul class="list-inline">
+                <li class="list-inline-item">@Html.ActionLink(@_localizer["Home"].Value, "Index", "Home")</li>
+                <li class="list-inline-item">@Html.ActionLink(@_localizer["About"].Value, "About", "Home")</li>
+                <li class="list-inline-item">@Html.ActionLink(@_localizer["Team"].Value, "Team", "Home")</li>
+                <li class="list-inline-item">@Html.ActionLink(@_localizer["Contact"].Value, "Contact", "Home")</li>
+            </ul>
+            <p class="copyright">Car Rental P2P © 2020</p>
+        </footer>
+    </div>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,39 @@
+﻿@model CarRentalP2P.Models.Api.Advertisement
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer _localizer
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>details</title>
+    <link rel="stylesheet" href="bootstrap.min.css" />
+    <link rel="stylesheet" href="styles.css" />
+    <link href="~/css/Card.css" rel="stylesheet" />
+</head>
+
+<body>
+    <div class="card">
+        <div class="card-body">
+            <div class="row">
+                <div class="col">
+                    <h1 ><strong>@Model.Title</strong></h1>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xl-5"><img src="@Model.ImageUri" class="img-thumbnail" /></div>
+                <div class="col-xl-5">
+                    <p>@_localizer["price"] : @Model.Price</p>
+                    <p>@_localizer["transmission"] :@Model.Transmission</p>
+                    <p>@_localizer["nbDoors"] :@Model.NumberDoors</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col offset-xl-7">
+                    <a href="@Url.Action("Details", "Advertisements")?id=@Model.Id"><button class="btn btn-primary" type="button">Details</button></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
